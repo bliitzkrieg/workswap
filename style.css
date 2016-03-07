@@ -1,7 +1,19 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700);
+
 body {
     background: #fffefb;
+    font-family: 'Raleway', sans-serif;
 }
 
 main {
     margin-top: 20px !important;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-default {
+    background: #FFF;
 }

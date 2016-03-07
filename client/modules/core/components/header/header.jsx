@@ -29,7 +29,9 @@ class Header extends React.Component {
             <Navbar>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <a href="/">workforwork</a>
+                        <a href="/">
+                            <img src="/images/w4w.png" alt="Workforwork Brand" height="40"/>
+                        </a>
                     </Navbar.Brand>
                 </Navbar.Header>
                 <Nav pullRight>
