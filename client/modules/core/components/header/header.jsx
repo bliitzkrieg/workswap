@@ -1,28 +1,8 @@
 import React from 'react';
-import { NavDropdown, MenuItem, NavItem, Navbar, Nav, Badge } from 'react-bootstrap';
+import { NavItem, Navbar, Nav } from 'react-bootstrap';
+import UserControls from '../nav-user-controls/UserControls.jsx';
 
 class Header extends React.Component {
-
-    isLoggedIn() {
-        if(this.props.user) {
-            return (
-                <NavDropdown eventKey={5} title={this.props.user.username} id="basic-nav-dropdown">
-                    <MenuItem eventKey={5.1} href="/create">Create Exchange</MenuItem>
-                    <MenuItem eventKey={5.1} href="/messages">Messages <Badge>5</Badge></MenuItem>
-                    <MenuItem divider />
-                    <MenuItem eventKey={5.2} href="/logout">Logout</MenuItem>
-                </NavDropdown>
-            );
-        }
-        else {
-            return (
-                <NavDropdown eventKey={5} title="Account" id="basic-nav-dropdown">
-                    <NavItem eventKey={5} href="/login">Login</NavItem>
-                    <NavItem eventKey={6} href="/register">Register</NavItem>
-                </NavDropdown>
-            );
-        }
-    }
 
     render() {
         return (
@@ -37,7 +17,7 @@ class Header extends React.Component {
                 <Nav pullRight>
                     <NavItem eventKey={2} href="/discover">Discover</NavItem>
                     <NavItem eventKey={3} href="/exchange">Exchange</NavItem>
-                    { this.isLoggedIn() }
+                    <UserControls username={ this.props.username } />
                 </Nav>
             </Navbar>
         );

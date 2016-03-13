@@ -5,7 +5,7 @@ class MainLayout extends React.Component {
     render() {
         return (
             <div>
-                <Header user={ Meteor.user() }/>
+                <Header username={ Meteor.user().username }/>
                 <main className="container">
                     { this.props.content }
                 </main>
