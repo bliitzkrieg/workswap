@@ -27,7 +27,7 @@ export default {
         const id = Meteor.uuid();
         Meteor.call('exchanges.create', id, requestType, offerType, title, details, remote, lat, lng, (err) => {
             if (err) {
-                return LocalState.set('CREATE_EXCHANGE_ERROR', err.message + 'omgurd');
+                return LocalState.set('CREATE_EXCHANGE_ERROR', err.message);
             }
         });
     },
