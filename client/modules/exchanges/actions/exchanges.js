@@ -1,31 +1,34 @@
+import ExchangeMethods from '../methods/exchanges';
+
 export default {
-    create({Meteor, LocalState, FlowRouter}, username, email, password, lat, lng) {
-        if (!username) {
-            return LocalState.set('CREATE_USER_ERROR', 'Username is required.');
+    create({Meteor, LocalState, FlowRouter}, requestType, offerType, title, details, remote, lat, lng) {
+        if (requestType === 'select') {
+            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Request Type is required.');
         }
 
-        if (!email) {
-            return LocalState.set('CREATE_USER_ERROR', 'Email is required.');
+        if (offerType === 'select') {
+            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Offer Type is required.');
         }
 
-        if (!password) {
-            return LocalState.set('CREATE_USER_ERROR', 'Password is required.');
+        if (!title) {
+            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Title is required.');
         }
 
-        LocalState.set('CREATE_USER_ERROR', null);
+        if (!details) {
+            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Details are required.');
+        }
 
-        Accounts.createUser({
-            username,
-            email,
-            password,
-            profile: {
-                lat: lat,
-                lng: lng
-            }} , function(err) {
-            if (err)
-                return LocalState.set('CREATE_USER_ERROR', err.reason);
-            else
-                FlowRouter.go('/')
+        if (!remote) {
+            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Remote is required.');
+        }
+
+        LocalState.set('CREATE_EXCHANGE_ERROR', null);
+
+        const id = Meteor.uuid();
+        Meteor.call('exchanges.create', id, requestType, offerType, title, details, remote, lat, lng, (err) => {
+            if (err) {
+                return LocalState.set('CREATE_EXCHANGE_ERROR', err.message + 'omgurd');
+            }
         });
     },
 
