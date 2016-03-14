@@ -12,8 +12,8 @@ export default function () {
             check(title, String);
             check(details, String);
             check(remote, String);
-            check(lat, Integer);
-            check(lng, Integer);
+            check(lat, Number);
+            check(lng, Number);
 
 
             //// XXX: Do some user authorization
