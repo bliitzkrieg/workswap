@@ -70,7 +70,7 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
-    authenticatedRoutes.route('/exchanges', {
+    authenticatedRoutes.route('/discover', {
         name: 'exchanges.list',
         action() {
             mount(MainLayoutCtx, {

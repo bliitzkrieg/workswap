@@ -29,7 +29,7 @@ export default {
             if (err) {
                 return LocalState.set('CREATE_EXCHANGE_ERROR', err.message);
             }
-            FlowRouter.go('/exchanges');
+            FlowRouter.go('/discover');
         });
     },
 
