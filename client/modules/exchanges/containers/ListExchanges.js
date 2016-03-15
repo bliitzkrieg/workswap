@@ -5,7 +5,7 @@ export const composer = ({context, clearErrors}, onData) => {
     const {Meteor, Collections} = context();
 
     if (Meteor.subscribe('exchanges.list').ready()) {
-        const exchanges = Collections.Exchanges.find().fetch();
+        const exchanges = Collections.Exchanges.find({}, { sort: {createdAt: -1} }).fetch();
         onData(null, { exchanges });
     } else {
         onData();
