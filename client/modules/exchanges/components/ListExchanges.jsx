@@ -10,11 +10,13 @@ class ListExchanges extends React.Component {
                 </div>
             )
         }
-
+        console.log(this.props.exchanges);
         return this.props.exchanges.map(function(item) {
             return (
                 <div key={item._id} className="test-class">
-                    { item.title }
+                    { item.title } - { item.user.username }
+                    <br/>
+                    { item.createdAt.toString() }
                 </div>
             )
         })
