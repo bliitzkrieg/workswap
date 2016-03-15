@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount} from 'react-mounter';
+import { mount } from 'react-mounter';
 
 import Layout from './components/main-layout/main.jsx';
 import Home from './components/home/home.jsx';
@@ -7,6 +7,7 @@ import Login from '../users/containers/Login';
 import NewUser from '../users/containers/NewUser';
 import Dashboard from './components/dashboard/dashboard.jsx';
 import CreateExchange from '../exchanges/containers/CreateExchange';
+import ListExchange from '../exchanges/containers/ListExchanges';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
@@ -61,10 +62,19 @@ export default function (injectDeps, {FlowRouter}) {
     } );
 
     authenticatedRoutes.route('/create', {
-        name: 'users.create',
+        name: 'exchanges.create',
         action() {
             mount(MainLayoutCtx, {
                 content: (<CreateExchange />)
+            });
+        }
+    });
+
+    authenticatedRoutes.route('/exchanges', {
+        name: 'exchanges.list',
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<ListExchange />)
             });
         }
     });

@@ -1,5 +1,6 @@
 import CreateExchange from '../components/CreateExchange.jsx';
-import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
+import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
+import { Exchanges } from '/lib/collections';
 
 export const composer = ({context, clearErrors}, onData) => {
     const {LocalState} = context();

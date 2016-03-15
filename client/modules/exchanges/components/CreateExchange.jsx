@@ -1,6 +1,5 @@
 import React from 'react';
 import { Input, ButtonInput } from 'react-bootstrap';
-import Login from '../../users/containers/Login';
 
 class CreateExchange extends React.Component {
 

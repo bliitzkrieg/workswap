@@ -12,15 +12,33 @@ export default function () {
             check(title, String);
             check(details, String);
             check(remote, String);
-            check(lat, Number);
-            check(lng, Number);
+            check(lat, String);
+            check(lng, String);
 
 
-            //// XXX: Do some user authorization
-            //const createdAt = new Date();
-            //const author = 'The User';
-            //const comment = {_id, postId, author, text, createdAt};
-            //Comments.insert(comment);
+            let user = Meteor.user();
+            if(user) {
+                const createdAt = new Date();
+                const exchange = {
+                    _id,
+                    requestType,
+                    offerType,
+                    title,
+                    details,
+                    remote,
+                    user,
+                    coords: {
+                        lat,
+                        lng
+                    },
+                    createdAt
+                };
+
+                Exchanges.insert(exchange);
+            }
+            else {
+                throw new Meteor.Error(403, 'User Not Authenticated');
+            }
         }
     });
 }
