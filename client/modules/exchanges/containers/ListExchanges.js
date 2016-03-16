@@ -1,4 +1,4 @@
-import ListExchanges from '../components/ListExchanges.jsx';
+import ListExchanges from '../components/ListExchange/ListExchanges.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({context, clearErrors}, onData) => {
