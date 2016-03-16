@@ -26,7 +26,7 @@ export default function () {
                     title,
                     details,
                     remote,
-                    user,
+                    user: user._id,
                     coords: {
                         lat,
                         lng
