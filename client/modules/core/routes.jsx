@@ -1,11 +1,10 @@
 import React from 'react';
 import { mount } from 'react-mounter';
 
-import Layout from './components/main-layout/main.jsx';
-import Home from './components/home/home.jsx';
+import Layout from './components/MainLayout/MainLayout.jsx';
+import Auth from '../core/components/Auth/Auth.jsx';
 import Login from '../users/containers/Login';
 import NewUser from '../users/containers/NewUser';
-import Dashboard from './components/dashboard/dashboard.jsx';
 import CreateExchange from '../exchanges/containers/CreateExchange';
 import ListExchange from '../exchanges/containers/ListExchanges';
 import UserExchanges from '../exchanges/containers/UserExchanges';
@@ -18,16 +17,9 @@ export default function (injectDeps, {FlowRouter}) {
     publicRoutes.route('/', {
         name: 'home',
         action() {
-            if(Meteor.user()) {
-                mount(MainLayoutCtx, {
-                    content: (<Dashboard />)
-                });
-            }
-            else {
-                mount(MainLayoutCtx, {
-                    content: (<Home />)
-                });
-            }
+            mount(MainLayoutCtx, {
+                content: (<Auth user={ Meteor.user() } />)
+            });
         }
     });
 
@@ -44,7 +36,7 @@ export default function (injectDeps, {FlowRouter}) {
         name: 'users.login.redirect',
         action() {
             mount(MainLayoutCtx, {
-                content: (<Login redirectTo={FlowRouter.getParam("redirect")} />)
+                content: (<Login redirectTo={ FlowRouter.getParam("redirect") } />)
             });
         }
     });
@@ -54,6 +46,15 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 content: (<NewUser />)
+            });
+        }
+    });
+
+    publicRoutes.route('/invite/:token', {
+        name: 'users.invite.register',
+        action({ token }) {
+            mount(MainLayoutCtx, {
+                content: (<NewUser invite={ token } />)
             });
         }
     });

@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavItem, Navbar, Nav } from 'react-bootstrap';
-import UserControls from '../nav-user-controls/UserControls.jsx';
+import UserControls from '../NavUserControls/NavUserControls.jsx';
 
 class Header extends React.Component {
 

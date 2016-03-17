@@ -11,7 +11,7 @@ class Login extends React.Component {
                 <form>
                     <Input ref="email" label="Email" type="email" placeholder="Email" />
                     <Input ref="password" label="Password" type="password" placeholder="Password" />
-                    <ButtonInput onClick={this.login.bind(this)} type="submit">Login</ButtonInput>
+                    <ButtonInput onClick={this.login.bind(this)} >Login</ButtonInput>
                     Don't have an account? Sign up <a href="/register">here</a>
                 </form>
             </div>

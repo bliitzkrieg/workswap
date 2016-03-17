@@ -1,5 +1,5 @@
 export default {
-    create({Meteor, LocalState, FlowRouter}, username, email, password, lat, lng) {
+    create({Meteor, LocalState, FlowRouter}, username, email, password, lat, lng, referral) {
         if (!username) {
             return LocalState.set('CREATE_USER_ERROR', 'Username is required.');
         }
@@ -19,6 +19,7 @@ export default {
             email,
             password,
             profile: {
+                referral: referral,
                 lat: lat,
                 lng: lng
             }} , function(err) {

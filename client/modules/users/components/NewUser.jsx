@@ -3,12 +3,13 @@ import { Input, ButtonInput } from 'react-bootstrap';
 
 
 class NewUser extends React.Component {
+
     constructor() {
         super();
         this.state = {
             lng: null,
             lat: null
-        }
+        };
     }
 
     componentDidMount() {
@@ -30,7 +31,7 @@ class NewUser extends React.Component {
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
                 <form>
                     <Input ref="username" type="text" label="Username" placeholder="Username" />
-                    <Input ref="email" type="text" label="Email" placeholder="Email" />
+                    <Input ref="email" type="email" label="Email" placeholder="Email" />
                     <Input ref="password" type="password" label="Password" placeholder="Password" />
                     <input ref="lat" value={ this.state.lat } type="hidden"/>
                     <input ref="lng" value={ this.state.lng } type="hidden"/>
@@ -49,7 +50,8 @@ class NewUser extends React.Component {
         const username = this.refs.username.refs.input;
         const email = this.refs.email.refs.input;
         const password = this.refs.password.refs.input;
-        create(username.value, email.value, password.value, lat.value, lng.value);
+        const referral = this.props.invite;
+        create(username.value, email.value, password.value, lat.value, lng.value, referral);
     }
 }
 

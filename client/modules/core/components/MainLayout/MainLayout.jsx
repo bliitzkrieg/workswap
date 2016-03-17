@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from '../header/header.jsx';
+import Header from '../Header/header.jsx';
 
 class MainLayout extends React.Component {
     render() {

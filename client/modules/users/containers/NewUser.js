@@ -1,10 +1,10 @@
 import NewUser from '../components/NewUser.jsx';
 import {useDeps, composeWithTracker, composeAll} from 'mantra-core';
 
-export const composer = ({context, clearErrors}, onData) => {
+export const composer = ({context, invite, clearErrors}, onData) => {
     const {LocalState} = context();
     const error = LocalState.get('CREATE_USER_ERROR');
-    onData(null, {error});
+    onData(null, {invite, error});
 
     // clearErrors when unmounting the component
     return clearErrors;
