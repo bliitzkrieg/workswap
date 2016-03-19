@@ -21,7 +21,7 @@ export default function () {
                     createdAt
                 };
 
-                //todo: refactor to use a different service
+                //todo: refactor to something cleaner and change url to something dynamic - good 4 now.
                 const invitation_id = Invitation.insert(invitation);
                 const template = "Hi " + recipientName + "!<br/><br/><br/>" + user.emails[0].address + " has invited you to use workforwork, a exchange of service platform. Have a service to offer? Trade services with local or remote users! <br/><br/><br/><a href='http://localhost:3000/invite/" + invitation_id + "'>Register here</a>";
                 Email.send({

@@ -6,9 +6,10 @@ export default function () {
     Accounts.onCreateUser(function(options, user) {
         const profile = options.profile;
         if(profile.referral) {
-            console.log('user referral exists');
-            Meteor.call('invitation.fulfill', profile.referral, (err) => { });
+            Meteor.call('invitation.fulfill', profile.referral, (err) => {});
         }
+        
+        Meteor.call('review.create', user._id, (err) => {});
 
         return user;
     });
