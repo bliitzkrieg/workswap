@@ -117,19 +117,14 @@ const ServiceData = [
 
 export default function () {
 
-    Migrations.add({
-        version: 1,
-        up: function() {
-
-            ServiceData.forEach(function(item){
-                console.log(item.name); // Do Insert if no results in table.
-            })
-
-        }
-        });
+    function seed () {
+        ServiceData.forEach(function(item){
+            console.log(item.name); // Do seed if no results in table.
+        })
+    }
 
     Meteor.startup(function () {
-        Migrations.migrateTo('latest');
+        seed();
     });
 
 }
