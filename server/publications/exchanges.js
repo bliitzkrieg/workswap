@@ -6,7 +6,7 @@ export default function () {
     Meteor.publish('exchanges.list', function () {
         return Exchanges.find({}, {
             limit: 15,
-            sort: {createdAt: -1}
+            sort: { createdAt: -1 }
         });
     });
 
@@ -15,7 +15,7 @@ export default function () {
             user: user._id
         }, {
             limit: 15,
-            sort: {createdAt: -1}
+            sort: { createdAt: -1 }
         });
     });
 }

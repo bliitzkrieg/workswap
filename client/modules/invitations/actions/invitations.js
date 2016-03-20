@@ -20,7 +20,7 @@ export default {
                 return LocalState.set('SEND_INVITATIONS_ERROR', err.message);
             }
 
-            // Give some type of notification
+            // todo: Give some type of notification
             console.log('it worked');
         });
     },

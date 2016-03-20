@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, ButtonInput } from 'react-bootstrap';
+import ServiceList from '../../containers/ServiceList';
 
 class CreateExchange extends React.Component {
 
@@ -26,7 +27,6 @@ class CreateExchange extends React.Component {
         });
     }
 
-    //requestType, OfferType, title, details, remote, lat, lng
     render() {
         const {error} = this.props;
         return (
@@ -35,15 +35,8 @@ class CreateExchange extends React.Component {
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
                 <form>
 
-                    <Input ref="requestType" type="select" label="What are you looking for?">
-                        <option value="select">Select</option>
-                        <option value="designer">Designer</option>
-                    </Input>
-
-                    <Input ref="offerType" type="select" label="What are you offering in exchange?">
-                        <option value="select">Select</option>
-                        <option value="developer">Developer</option>
-                    </Input>
+                    <ServiceList label="What are you looking for?" ref="requestType" />
+                    <ServiceList label="What are you offering in exchange?" ref="offerType" />
 
                     <Input ref="title" type="text" label="Your exchange Title" placeholder="Developer Looking For Designer" />
                     <Input ref="details" type="textarea" label="Give a little more details" placeholder="I am building a todo app and need a designer to help style a component..." />

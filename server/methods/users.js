@@ -8,7 +8,7 @@ export default function () {
         if(profile.referral) {
             Meteor.call('invitation.fulfill', profile.referral, (err) => {});
         }
-        
+
         Meteor.call('review.create', user._id, (err) => {});
 
         return user;

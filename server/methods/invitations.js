@@ -21,13 +21,14 @@ export default function () {
                     createdAt
                 };
 
-                //todo: refactor to something cleaner and change url to something dynamic - good 4 now.
+                //todo: refactor to something cleaner
                 const invitation_id = Invitation.insert(invitation);
-                const template = "Hi " + recipientName + "!<br/><br/><br/>" + user.emails[0].address + " has invited you to use workforwork, a exchange of service platform. Have a service to offer? Trade services with local or remote users! <br/><br/><br/><a href='http://localhost:3000/invite/" + invitation_id + "'>Register here</a>";
+                const redirect = "http://" + process.env.SITE_URL + "/invite/" + invitation_id;
+                const template = "Hi " + recipientName + "!<br/><br/><br/>" + user.emails[0].address + " has invited you to use workswap, a exchange of service platform. Have a service to offer? Trade services with local or remote users! <br/><br/><br/><a href='" + redirect + "'>Register here</a>";
                 Email.send({
                     to: recipient,
-                    from: 'test@test.ca',
-                    subject: 'Your Friend has invited you use workforwork!',
+                    from: 'donotreply@workswap.io',
+                    subject: 'Your Friend has invited you use workswap!',
                     html: template
                 })
             }

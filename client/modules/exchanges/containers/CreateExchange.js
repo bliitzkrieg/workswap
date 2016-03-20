@@ -1,4 +1,4 @@
-import CreateExchange from '../components/CreateExchange.jsx';
+import CreateExchange from '../components/CreateExchange/CreateExchange.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import { Exchanges } from '/lib/collections';
 
