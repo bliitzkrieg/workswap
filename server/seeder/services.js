@@ -112,6 +112,9 @@ const ServiceData = [
     },
     {
         name: 'Mechanic'
+    },
+    {
+        name: 'Gardener'
     }
 ];
 
