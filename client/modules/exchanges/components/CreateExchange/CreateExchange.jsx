@@ -71,7 +71,6 @@ class CreateExchange extends React.Component {
     createExchange(e) {
         e.preventDefault();
         const {create} = this.props;
-        debugger;
         const requestType = this.state.request;
         const offerType = this.state.offer;
         const title = this.refs.title.refs.input;
