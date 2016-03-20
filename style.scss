@@ -1,8 +1,11 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Chewy);
 
+@import "{}/variables.scss";
 
 body {
     background: #fffefb;
+    color: $workswap-black;
     font-family: 'Raleway', sans-serif;
 }
 
@@ -16,5 +19,5 @@ main {
 }
 
 .navbar-default {
-    background: #FFF;
+    background: $workswap-white;
 }

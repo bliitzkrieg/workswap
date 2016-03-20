@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavDropdown, MenuItem, NavItem, Badge } from 'react-bootstrap';
+import { NavDropdown, MenuItem, NavItem, Badge, Nav } from 'react-bootstrap';
 
 class UserControl extends React.Component {
 
@@ -19,10 +19,10 @@ class UserControl extends React.Component {
 
     getGuest() {
         return (
-            <NavDropdown eventKey={5} title="Account" id="basic-nav-dropdown">
+            <Nav>
                 <NavItem eventKey={5} href="/login">Login</NavItem>
                 <NavItem eventKey={6} href="/register">Register</NavItem>
-            </NavDropdown>
+            </Nav>
         );
     }
 
