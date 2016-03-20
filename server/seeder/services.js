@@ -118,9 +118,15 @@ const ServiceData = [
 export default function () {
 
     function seed () {
-        ServiceData.forEach(function(item){
-            console.log(item.name); // Do seed if no results in table.
-        })
+
+        const count = Services.find({}).count();
+        console.log(count);
+
+        if(count === 0) {
+            ServiceData.forEach(function(item) {
+                Services.insert({ name: item.name });
+            })
+        }
     }
 
     Meteor.startup(function () {

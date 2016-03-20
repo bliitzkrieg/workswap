@@ -9,7 +9,7 @@ class CreateExchange extends React.Component {
         this.state = {
             lng: null,
             lat: null
-        }
+        };
     }
 
     componentDidMount() {
@@ -27,6 +27,18 @@ class CreateExchange extends React.Component {
         });
     }
 
+    onRequestCB(value) {
+        this.setState({
+            request: value
+        });
+    }
+
+    onOfferCB(value) {
+        this.setState({
+            offer: value
+        });
+    }
+
     render() {
         const {error} = this.props;
         return (
@@ -35,8 +47,8 @@ class CreateExchange extends React.Component {
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
                 <form>
 
-                    <ServiceList label="What are you looking for?" ref="requestType" />
-                    <ServiceList label="What are you offering in exchange?" ref="offerType" />
+                    <ServiceList label="What are you looking for?" callback={ this.onRequestCB.bind(this) } />
+                    <ServiceList label="What are you offering in exchange?" callback={ this.onOfferCB.bind(this) } />
 
                     <Input ref="title" type="text" label="Your exchange Title" placeholder="Developer Looking For Designer" />
                     <Input ref="details" type="textarea" label="Give a little more details" placeholder="I am building a todo app and need a designer to help style a component..." />
@@ -48,7 +60,7 @@ class CreateExchange extends React.Component {
 
                     <input ref="lat" value={ this.state.lat } type="hidden"/>
                     <input ref="lng" value={ this.state.lng } type="hidden"/>
-                    <ButtonInput onClick={this.createExchange.bind(this)}
+                    <ButtonInput onClick={ this.createExchange.bind(this) }
                                  value="Create"
                                  type="submit" />
                 </form>
@@ -59,8 +71,9 @@ class CreateExchange extends React.Component {
     createExchange(e) {
         e.preventDefault();
         const {create} = this.props;
-        const requestType = this.refs.requestType.refs.input;
-        const offerType = this.refs.offerType.refs.input;
+        debugger;
+        const requestType = this.state.request;
+        const offerType = this.state.offer;
         const title = this.refs.title.refs.input;
         const details = this.refs.details.refs.input;
         const remote = this.refs.remote.refs.input;
