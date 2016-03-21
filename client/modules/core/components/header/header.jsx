@@ -5,8 +5,6 @@ import HeaderSearch from '../HeaderSearch/HeaderSearch.jsx';
 
 class Header extends React.Component {
 
-
-
     render() {
         return (
             <Navbar>

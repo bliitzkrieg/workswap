@@ -1,0 +1,22 @@
+@import "{}/variables.scss";
+
+.cta-home {
+  height: 400px;
+  margin-top: -20px;
+  margin-bottom: 20px;
+  background: url('./images/bg.jpg') no-repeat bottom center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  h1 {
+    text-align: center;
+    font-size: 72px;
+    font-weight: 100;
+    color: $workswap-black;
+  }
+  .form-group {
+    max-width: 500px;
+  }
+}

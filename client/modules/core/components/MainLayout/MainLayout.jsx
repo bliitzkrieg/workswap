@@ -7,7 +7,7 @@ class MainLayout extends React.Component {
         return (
             <div>
                 <Header username={ username }/>
-                <main className="container">
+                <main>
                     { this.props.content }
                 </main>
             </div>
