@@ -1,14 +1,19 @@
 import React from 'react';
 import { Grid, Row, Col } from 'react-bootstrap';
-import Map from '../HomeCTA/HomeCTA.jsx';
+import HomeCTA from '../HomeCTA/HomeCTA.jsx';
 
 const Home = () => (
     <div>
-        <Map />
+        <HomeCTA />
         <Grid className="container">
             <Row>
                 <Col lg={ 12 }>
-                    You are Home. Hello! Do some promo stuff
+                   Show 15 Trending
+                </Col>
+            </Row>
+            <Row>
+                <Col lg={ 12 }>
+                    Show 15 Newest
                 </Col>
             </Row>
         </Grid>
