@@ -1,5 +1,20 @@
 export default {
-    create({Meteor, LocalState, FlowRouter}, username, email, password, lat, lng, referral) {
+    create({Meteor, LocalState, FlowRouter}, username, email, password, file, lat, lng, referral) {
+
+        if(file.length === 0) {
+            return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
+        }
+
+        const five_mb = 1024 * 1024 * 5;
+        if(file[0].size > five_mb) {
+            return LocalState.set('CREATE_USER_ERROR', 'Profile Photo file size must be less than 5MB');
+        }
+
+        const file_type = file[0].type;
+        if(file_type !== 'image/jpeg' && file_type.type !== 'image/png' && file_type.type !== 'image/jpg') {
+            return LocalState.set('CREATE_USER_ERROR', 'Profile Photo must be PNG or JPG.');
+        }
+
         if (!username) {
             return LocalState.set('CREATE_USER_ERROR', 'Username is required.');
         }
@@ -14,19 +29,32 @@ export default {
 
         LocalState.set('CREATE_USER_ERROR', null);
 
-        Accounts.createUser({
-            username,
-            email,
-            password,
-            profile: {
-                referral: referral,
-                lat: lat,
-                lng: lng
-            }} , function(err) {
-            if (err)
-                return LocalState.set('CREATE_USER_ERROR', err.reason);
-            else
-                FlowRouter.go('/')
+        S3.upload({
+            files: file,
+            path: "profile"
+        }, function(e, response) {
+            if(e) {
+                return LocalState.set('CREATE_USER_ERROR', "An error occurred uploading your profile image. Please try again.");
+            }
+
+            const url = response.url;
+            Accounts.createUser({
+                username,
+                email,
+                password,
+                profile: {
+                    referral: referral,
+                    lat: lat,
+                    lng: lng,
+                    avatar: url
+                }} , function(err) {
+                    if (err)
+                        return LocalState.set('CREATE_USER_ERROR', err.reason);
+                    else
+                        FlowRouter.go('/')
+            });
+
+
         });
     },
 

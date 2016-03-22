@@ -35,6 +35,7 @@ class NewUser extends React.Component {
                     <Input ref="password" type="password" label="Password" placeholder="Password" />
                     <input ref="lat" value={ this.state.lat } type="hidden"/>
                     <input ref="lng" value={ this.state.lng } type="hidden"/>
+                    <Input ref="profile_photo" type="file" label="Profile Photo" help="Upload a profile Picture" />
                     <ButtonInput onClick={this.createUser.bind(this)}
                                  value="Sign Up"
                                  type="submit" />
@@ -51,7 +52,9 @@ class NewUser extends React.Component {
         const email = this.refs.email.refs.input;
         const password = this.refs.password.refs.input;
         const referral = this.props.invite;
-        create(username.value, email.value, password.value, lat.value, lng.value, referral);
+        const file = this.refs.profile_photo.refs.input.files;
+
+        create(username.value, email.value, password.value, file, lat.value, lng.value, referral);
     }
 }
 

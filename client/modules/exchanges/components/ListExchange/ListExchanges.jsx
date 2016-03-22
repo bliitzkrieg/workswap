@@ -1,4 +1,5 @@
 import React from 'react';
+import ExchangeItem from '../ExchangeItem/ExchangeItem.jsx';
 
 class ListExchanges extends React.Component {
 
@@ -12,11 +13,7 @@ class ListExchanges extends React.Component {
         }
         return this.props.exchanges.map(function(item) {
             return (
-                <div key={item._id} className="test-class">
-                    { item.title } - { item.user.username }
-                    <br/>
-                    { item.createdAt.toString() }
-                </div>
+                <ExchangeItem key={ item._id } exchange={ item }/>
             )
         })
     }

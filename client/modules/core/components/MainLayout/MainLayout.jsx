@@ -5,7 +5,7 @@ import Footer from '../Footer/Footer.jsx';
 class MainLayout extends React.Component {
 
     isHome() {
-        if(FlowRouter._current.route.path != '/' && !Meteor.user()) {
+        if(FlowRouter._current.route.path != '/' && Meteor.user() || FlowRouter._current.route.path != '/' && !Meteor.user()) {
             return "container";
         }
     }

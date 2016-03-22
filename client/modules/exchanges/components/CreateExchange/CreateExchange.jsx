@@ -77,7 +77,7 @@ class CreateExchange extends React.Component {
         const details = this.refs.details.refs.input;
         const remote = this.refs.remote.refs.input;
         const {lat, lng} = this.refs;
-        create(requestType.value, offerType.value, title.value, details.value, remote.value, lat.value, lng.value);
+        create(requestType, offerType, title.value, details.value, remote.value, lat.value, lng.value);
     }
 }
 
