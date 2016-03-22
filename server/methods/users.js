@@ -9,7 +9,7 @@ export default function () {
             Meteor.call('invitation.fulfill', profile.referral, (err) => {});
         }
 
-        Meteor.call('review.create', user._id, (err) => {});
+        Meteor.call('rating.create', user._id, (err) => {});
 
         return user;
     });

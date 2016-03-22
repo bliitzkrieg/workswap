@@ -1,11 +1,11 @@
-import { Reviews } from '/lib/collections';
+import { Ratings } from '/lib/collections';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 
 export default function () {
 
     Meteor.methods({
-        'review.create'(user_id) {
+        'rating.create'(user_id) {
 
             if(user_id) {
 
@@ -18,7 +18,7 @@ export default function () {
                     createdAt
                 };
 
-                Reviews.insert(review);
+                Ratings.insert(review);
             }
             else {
                 throw new Meteor.Error(403, 'User Not Authenticated');
