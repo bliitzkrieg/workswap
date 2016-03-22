@@ -1,0 +1,16 @@
+@import "{}/variables.scss";
+
+.home-well {
+  margin-top: -60px;
+  min-height: 200px;
+  background: $workswap-white;
+}
+
+.white-well {
+  min-height: 200px;
+  background: $workswap-white;
+}
+
+.heading {
+  font-weight: 100;
+}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Row, Col } from 'react-bootstrap';
+import { Grid, Row, Col, Well } from 'react-bootstrap';
 import HomeCTA from '../HomeCTA/HomeCTA.jsx';
 
 const Home = () => (
@@ -8,12 +8,18 @@ const Home = () => (
         <Grid className="container">
             <Row>
                 <Col lg={ 12 }>
-                   Show 15 Trending
+                   <Well className="home-well">
+                        <h2 className="heading">Trending</h2>
+                        15 Results
+                   </Well>
                 </Col>
             </Row>
             <Row>
                 <Col lg={ 12 }>
-                    Show 15 Newest
+                    <Well className="white-well">
+                        <h2 className="heading">Newest</h2>
+                        15 Results
+                    </Well>
                 </Col>
             </Row>
         </Grid>

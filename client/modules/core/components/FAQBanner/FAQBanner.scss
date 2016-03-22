@@ -1,0 +1,34 @@
+@import "{}/variables.scss";
+
+.faq-cta {
+  height: 300px;
+  margin-top: -20px;
+  margin-bottom: 30px;
+  background: url('./images/faq.png') no-repeat center center;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  color: $workswap-white;
+}
+
+.faq-cta-banner {
+  padding: 30px;
+  border-radius: 5px;
+  background: rgba(26, 26, 26, 0.65);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  h1 {
+    margin: 0;
+  }
+}
+
+.faq-link {
+  color: $workswap-main;
+  &:hover {
+    color: lighten($workswap-main, 10%);
+  }
+}

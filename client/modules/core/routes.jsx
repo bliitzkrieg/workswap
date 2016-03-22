@@ -2,15 +2,19 @@ import React from 'react';
 import { mount } from 'react-mounter';
 
 import Layout from './components/MainLayout/MainLayout.jsx';
+import FullLayout from './components/FullLayout/FullLayout.jsx';
 import Auth from '../core/components/Auth/Auth.jsx';
 import Login from '../users/containers/Login';
 import NewUser from '../users/containers/NewUser';
 import CreateExchange from '../exchanges/containers/CreateExchange';
 import ListExchange from '../exchanges/containers/ListExchanges';
 import UserExchanges from '../exchanges/containers/UserExchanges';
+import FAQ from '../core/components/FAQ/FAQ.jsx';
+import Contact from '../core/components/Contact/Contact.jsx';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
+    const FullLayoutCtx = injectDeps(FullLayout);
 
     const publicRoutes = FlowRouter.group( { name: 'public' } );
 
@@ -28,6 +32,24 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 content: (<Login />)
+            });
+        }
+    });
+
+    publicRoutes.route('/faq', {
+        name: 'users.faq',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<FAQ/>)
+            });
+        }
+    });
+
+    publicRoutes.route('/contact', {
+        name: 'users.contact',
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<Contact />)
             });
         }
     });

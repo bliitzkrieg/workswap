@@ -7,6 +7,11 @@ body {
     background: #fffefb;
     color: $workswap-black;
     font-family: 'Raleway', sans-serif;
+    font-weight: 100;
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: 100;
 }
 
 main {
