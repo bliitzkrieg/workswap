@@ -46,8 +46,8 @@ class NewUser extends React.Component {
 
     createUser(e) {
         e.preventDefault();
-        const {create} = this.props;
-        const {lat, lng} = this.refs;
+        const { create } = this.props;
+        const { lat, lng } = this.refs;
         const username = this.refs.username.refs.input;
         const email = this.refs.email.refs.input;
         const password = this.refs.password.refs.input;

@@ -11,10 +11,12 @@ class MainLayout extends React.Component {
     }
 
     render() {
-        const username =  Meteor.user() ? Meteor.user().username : null;
+        const user = Meteor.user();
+        const username = user ? user.username : null;
+        const avatar = user ? user.profile.avatar : null;
         return (
             <div>
-                <Header username={ username }/>
+                <Header username={ username } avatar={ avatar }/>
                 <main className={ this.isHome() }>
                     { this.props.content }
                 </main>

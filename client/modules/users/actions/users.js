@@ -4,7 +4,7 @@ export default {
         if(file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
         }
-        
+
         const five_mb = 1024 * 1024 * 5;
         if(file[0].size > five_mb) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo file size must be less than 5MB');
@@ -77,6 +77,10 @@ export default {
                 FlowRouter.go('/');
             }
         });
+    },
+
+    changePhoto({Meteor, LocalState, FlowRouter}, url) {
+
     },
 
     clearErrors({LocalState}) {

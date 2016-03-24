@@ -11,6 +11,8 @@ import ListExchange from '../exchanges/containers/ListExchanges';
 import UserExchanges from '../exchanges/containers/UserExchanges';
 import FAQ from '../core/components/FAQ/FAQ.jsx';
 import Contact from '../core/components/Contact/Contact.jsx';
+import Profile from '../users/containers/Profile';
+import PublicProfile from '../users/containers/PublicProfile';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
@@ -27,11 +29,20 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
-    publicRoutes.route( '/login', {
+    publicRoutes.route('/login', {
         name: 'users.login',
         action() {
             mount(MainLayoutCtx, {
                 content: (<Login />)
+            });
+        }
+    });
+
+    publicRoutes.route('/user/:user', {
+       name: 'users.profile',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<PublicProfile />)
             });
         }
     });
@@ -84,6 +95,15 @@ export default function (injectDeps, {FlowRouter}) {
     const authenticatedRoutes = FlowRouter.group( {
         name: 'authenticated'
     } );
+
+    authenticatedRoutes.route('/profile', {
+        name: 'user.profile',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<PublicProfile />)
+            });
+        }
+    });
 
     authenticatedRoutes.route('/create', {
         name: 'exchanges.create',

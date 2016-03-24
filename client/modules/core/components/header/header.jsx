@@ -18,7 +18,7 @@ class Header extends React.Component {
                 <HeaderSearch />
                 <Nav pullRight>
                     <NavItem eventKey={2} href="/discover">Discover</NavItem>
-                    <UserControls username={ this.props.username } />
+                    <UserControls username={ this.props.username } avatar={ this.props.avatar } />
                 </Nav>
             </Navbar>
         );

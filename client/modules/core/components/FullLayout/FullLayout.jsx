@@ -5,10 +5,12 @@ import Footer from '../Footer/Footer.jsx';
 class MainLayout extends React.Component {
 
     render() {
-        const username =  Meteor.user() ? Meteor.user().username : null;
+        const user = Meteor.user();
+        const username = user ? user.username : null;
+        const avatar = user ? user.profile.avatar : null;
         return (
             <div>
-                <Header username={ username }/>
+                <Header username={ username } avatar={ avatar }/>
                 <main>
                     { this.props.content }
                 </main>
