@@ -4,14 +4,14 @@ export default {
         if(file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
         }
-
+        
         const five_mb = 1024 * 1024 * 5;
         if(file[0].size > five_mb) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo file size must be less than 5MB');
         }
 
         const file_type = file[0].type;
-        if(file_type !== 'image/jpeg' && file_type.type !== 'image/png' && file_type.type !== 'image/jpg') {
+        if(file_type !== 'image/jpeg' && file_type !== 'image/png' && file_type !== 'image/jpg') {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo must be PNG or JPG.');
         }
 
