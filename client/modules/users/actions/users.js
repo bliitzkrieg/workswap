@@ -83,6 +83,10 @@ export default {
 
     },
 
+    changeAbout({Meteor, LocalState, FlowRouter}, about) {
+
+    },
+
     clearErrors({LocalState}) {
         return LocalState.set('SAVING_ERROR', null);
     }

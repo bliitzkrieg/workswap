@@ -13,9 +13,7 @@ export const composer = ({ context, clearErrors }, onData) => {
             params._id = user_id;
         }
 
-        const user = Meteor.users.findOne(params); // FIGURE OUT WHY CREATED AT IS NOT RETURNING CREATED AT
-
-        console.log(user);
+        const user = Meteor.users.findOne(params);
 
         if (Meteor.subscribe('ratings.list', user._id).ready()) {
             const ratings = Collections.Ratings.find({user: user._id}).fetch();
@@ -33,6 +31,8 @@ export const composer = ({ context, clearErrors }, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
+    changePhoto: actions.users.changePhoto,
+    changeAbout: actions.users.changeAbout,
     clearErrors: actions.users.clearErrors,
     context: () => context
 });

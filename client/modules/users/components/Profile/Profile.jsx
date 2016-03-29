@@ -3,6 +3,7 @@ import { Grid, Row, Col, Image, Well, Input } from 'react-bootstrap';
 import Ratings from '../../../core/components/Stars/Stars.jsx';
 import Verified from '../../../core/components/Verified/Verified.jsx';
 import JoinedStamp from '../../../core/components/JoinedStamp/JoinedStamp.jsx';
+import Avatar from '../../../core/components/Avatar/Avatar.jsx';
 
 class Profile extends React.Component {
 
@@ -26,6 +27,26 @@ class Profile extends React.Component {
         });
 
         return value / this.getRatingCount();
+    }
+
+    getAbout() {
+        if(this.props.user._id === Meteor.user()._id) {
+            return (
+                <Input type="textarea" placeholder="Enter a bit about yourself" value={ this.props.user.profile.about } ref="about" onBlur={ this.changeAbout.bind(this) } />
+            );
+        }
+        else {
+            if(this.props.user.profile.about !== null) {
+                return (
+                    <div className="profile-about">{ this.props.user.profile.about }</div>
+                );
+            }
+            return (
+                <div>
+                    { this.props.username } hasn't added an about me yet.
+                </div>
+            )
+        }
     }
 
     getExchanges() {
@@ -60,13 +81,13 @@ class Profile extends React.Component {
                     <Row>
                         <Col lg={ 12 }>
                             <Well className="profile-container">
-                                <Image className="profile-avatar" src={ user.profile.avatar } rounded height="120" width="120"/>
+                                <Avatar src={ user.profile.avatar } height="120" width="120"/>
                                 <div className="profile-details">
-                                    <JoinedStamp joined={ user.createdAt } />
+                                    <JoinedStamp joined={ user.profile.createdAt } />
                                     <Verified verified={ user.emails[0].verified } />
                                 </div>
                                 <h2>About { user.username }</h2>
-                                <div className="profile-about">I am a great developers holy crap</div>
+                                { this.getAbout() }
                                 { this.getExchanges() }
                             </Well>
                         </Col>
@@ -76,7 +97,7 @@ class Profile extends React.Component {
         )
     }
 
-    changeProfile(e) {
+    changePhoto(e) {
         e.preventDefault();
         const { changePhoto } = this.props;
         //const email = this.refs.email.refs.input;
@@ -86,33 +107,17 @@ class Profile extends React.Component {
         //password.value = '';
     }
 
+    changeAbout(e) {
+        e.preventDefault();
+        const { changeAbout } = this.props;
+        const about = this.refs.about.refs.input;
+        const user = this.props.user;
+
+        if(about.length !== 0 || about !== user.profile.about) {
+            changeAbout(about.value);
+        }
+    }
+
 }
 
 export default Profile;
-
-//<Banner background={ this.props.user.profile.background } username={ this.props.username }>
-//
-//</Banner>
-
-//<Grid>
-//    <Row>
-//        <Col lg={ 3 }>
-//            <Well>
-//                <div className="profile-username">{ user.username }</div>
-//                <Ratings rating={ this.getAverage() }/>
-//                <div className="ratings-count">
-//                    Ratings: { this.getRatingCount() }
-//                </div>
-//                <div className="profile-user-container">
-//                    <Image src={ this.props.user.profile.avatar } rounded width="100" />
-//                </div>
-//                { this.userControls() }
-//            </Well>
-//        </Col>
-//        <Col lg={ 9 }>
-//            <Well>
-//                <h3>Exchanges</h3>
-//            </Well>
-//        </Col>
-//    </Row>
-//</Grid>

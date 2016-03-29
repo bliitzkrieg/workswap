@@ -11,6 +11,8 @@ export default function () {
 
         Meteor.call('rating.create', user._id, (err) => {});
 
+        profile.createdAt = new Date();
+
         user.profile = profile;
         return user;
     });
