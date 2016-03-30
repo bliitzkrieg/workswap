@@ -4,6 +4,8 @@ import Ratings from '../../../core/components/Stars/Stars.jsx';
 import Verified from '../../../core/components/Verified/Verified.jsx';
 import JoinedStamp from '../../../core/components/JoinedStamp/JoinedStamp.jsx';
 import Avatar from '../../../core/components/Avatar/Avatar.jsx';
+import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx';
+import Banner from '../../../core/components/Banner/Banner.jsx';
 
 class Profile extends React.Component {
 
@@ -86,9 +88,7 @@ class Profile extends React.Component {
 
         return (
             <div>
-                <div className="profile-banner">
-                    <div className="profile-banner-username"> { user.username }</div>
-                </div>
+                <Banner image="http://www.intrawallpaper.com/static/images/abstract-mosaic-background.png" message={ user.username } />
                 <Grid>
                     <Row>
                         <Col lg={ 12 }>
@@ -98,9 +98,10 @@ class Profile extends React.Component {
                                     <JoinedStamp joined={ user.profile.createdAt } />
                                     <Verified verified={ user.emails[0].verified } />
                                 </div>
+                                <AlertMessage type='danger' message={ error } />
+                                <AlertMessage type='success' message={ success } timeout={ 5000 } />
                                 <h2>About { user.username }</h2>
                                 { this.getAbout() }
-                                { success }
                                 { this.getExchanges() }
                             </Well>
                         </Col>

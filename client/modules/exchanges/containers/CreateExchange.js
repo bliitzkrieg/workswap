@@ -2,10 +2,10 @@ import CreateExchange from '../components/CreateExchange/CreateExchange.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import { Exchanges } from '/lib/collections';
 
-export const composer = ({context, clearErrors}, onData) => {
-    const {LocalState} = context();
+export const composer = ({ context, clearErrors }, onData) => {
+    const { LocalState } = context();
     const error = LocalState.get('CREATE_EXCHANGE_ERROR');
-    onData(null, {error});
+    onData(null, { error });
 
     // clearErrors when unmounting the component
     return clearErrors;

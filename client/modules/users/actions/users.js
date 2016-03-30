@@ -96,7 +96,7 @@ export default {
             if (err) {
                 return LocalState.set('PROFILE_ERROR', err.message);
             }
-            LocalState.set('PROFILE_SUCCESS', 'Profile about successfully set.');
+            LocalState.set('PROFILE_SUCCESS', 'About successfully set');
         });
     },
 

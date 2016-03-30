@@ -1,6 +1,6 @@
 import React from 'react';
 import { Alert, Well, Input, ButtonInput } from 'react-bootstrap';
-import ErrorMessage from '../../../core/components/ErrorMessage/ErrorMessage.jsx';
+import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx';
 
 class ShortInvitation extends React.Component {
 
@@ -8,7 +8,7 @@ class ShortInvitation extends React.Component {
         const { error } = this.props;
         return (
             <Well>
-                <ErrorMessage error={ error } />
+                <AlertMessage type='danger' message={ error } />
                 <div className="ShortInvitation-prompt">Have a friend that would love this? <br/><br/> Send them an invitation!</div>
                 <Input type="text" placeholder="Your Name" label="Your Name" ref="sender"/>
                 <Input type="email" placeholder="Your Friends Email" label="Your Friends Email" ref="recipient"/>

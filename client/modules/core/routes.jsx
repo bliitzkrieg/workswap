@@ -11,7 +11,6 @@ import ListExchange from '../exchanges/containers/ListExchanges';
 import UserExchanges from '../exchanges/containers/UserExchanges';
 import FAQ from '../core/components/FAQ/FAQ.jsx';
 import Contact from '../core/components/Contact/Contact.jsx';
-import Profile from '../users/containers/Profile';
 import PublicProfile from '../users/containers/PublicProfile';
 
 export default function (injectDeps, {FlowRouter}) {

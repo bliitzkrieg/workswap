@@ -2,10 +2,10 @@ import ExchangeSearch from '../components/ExchangeSearch/ExchangeSearch.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 import { Exchanges } from '/lib/collections';
 
-export const composer = ({context, clearErrors}, onData) => {
-    const {LocalState} = context();
+export const composer = ({ context, clearErrors }, onData) => {
+    const { LocalState } = context();
     const error = LocalState.get('SEARCH_EXCHANGE_ERROR');
-    onData(null, {error});
+    onData(null, { error });
 
     return clearErrors;
 };
