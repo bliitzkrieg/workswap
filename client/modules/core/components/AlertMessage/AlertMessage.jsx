@@ -19,7 +19,11 @@ class AlertMessage extends React.Component {
     render() {
         if(this.props.message && this.state.visible) {
             return (
-                <Alert bsStyle={ this.props.type } onDismiss={ this.handleAlertDismiss.bind(this) } dismissAfter={ this.props.timeout }>{ this.props.message }</Alert>
+                <Alert bsStyle={ this.props.type }
+                       onDismiss={ this.handleAlertDismiss.bind(this) }
+                       dismissAfter={ this.props.timeout }>
+                    { this.props.message }
+                </Alert>
             );
         }
         return null;
