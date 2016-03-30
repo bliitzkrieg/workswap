@@ -4,6 +4,7 @@ import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 export const composer = ({ context, clearErrors }, onData) => {
     const { LocalState, Collections } = context();
     const error = LocalState.get('PROFILE_ERROR');
+    const success = LocalState.get('PROFILE_SUCCESS');
     const user_id = FlowRouter.getParam("user");
 
     if (Meteor.subscribe('user.fetch', user_id).ready()) {

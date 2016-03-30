@@ -12,9 +12,29 @@ export default function () {
         Meteor.call('rating.create', user._id, (err) => {});
 
         profile.createdAt = new Date();
+        profile.about = null;
 
         user.profile = profile;
         return user;
+    });
+
+    Meteor.methods({
+
+        'user.setAbout'(about, id) {
+            check(about, String);
+
+            const user = Meteor.user();
+
+            if(user._id === id) {
+                Meteor.users.update({ _id: user._id }, {
+                    $set: { 'profile.about': about }
+                });
+            }
+            else {
+                throw new Meteor.Error(403, 'User Not Authenticated');
+            }
+        }
+
     });
 
 }

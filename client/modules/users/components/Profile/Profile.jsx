@@ -7,6 +7,13 @@ import Avatar from '../../../core/components/Avatar/Avatar.jsx';
 
 class Profile extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            about: props.user.profile.about
+        };
+    }
+
     userControls() {
         if(this.props.user._id == Meteor.user()._id) {
             return (
@@ -32,7 +39,11 @@ class Profile extends React.Component {
     getAbout() {
         if(this.props.user._id === Meteor.user()._id) {
             return (
-                <Input type="textarea" placeholder="Enter a bit about yourself" value={ this.props.user.profile.about } ref="about" onBlur={ this.changeAbout.bind(this) } />
+                <Input type="textarea" placeholder="Enter a bit about yourself"
+                       value={ this.state.about }
+                       ref="about"
+                       onChange={ this.handleChange.bind(this) }
+                       onBlur={ this.changeUserAbout.bind(this) } />
             );
         }
         else {
@@ -71,7 +82,8 @@ class Profile extends React.Component {
     }
 
     render() {
-        const { error, user } = this.props;
+        const { error, user, success } = this.props;
+
         return (
             <div>
                 <div className="profile-banner">
@@ -88,6 +100,7 @@ class Profile extends React.Component {
                                 </div>
                                 <h2>About { user.username }</h2>
                                 { this.getAbout() }
+                                { success }
                                 { this.getExchanges() }
                             </Well>
                         </Col>
@@ -107,7 +120,7 @@ class Profile extends React.Component {
         //password.value = '';
     }
 
-    changeAbout(e) {
+    changeUserAbout(e) {
         e.preventDefault();
         const { changeAbout } = this.props;
         const about = this.refs.about.refs.input;
@@ -116,6 +129,10 @@ class Profile extends React.Component {
         if(about.length !== 0 || about !== user.profile.about) {
             changeAbout(about.value);
         }
+    }
+
+    handleChange(e) {
+        this.setState({ about: e.target.value });
     }
 
 }

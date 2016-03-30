@@ -1,5 +1,5 @@
 export default {
-    create({Meteor, LocalState, FlowRouter}, username, email, password, file, lat, lng, referral) {
+    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, lat, lng, referral) {
 
         if(file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
@@ -58,7 +58,7 @@ export default {
         });
     },
 
-    login({Meteor, LocalState, FlowRouter}, email, password, redirectTo) {
+    login({ Meteor, LocalState, FlowRouter }, email, password, redirectTo) {
         if (!email) {
             return LocalState.set('LOGIN_ERROR', 'Email is required.');
         }
@@ -79,12 +79,29 @@ export default {
         });
     },
 
-    changePhoto({Meteor, LocalState, FlowRouter}, url) {
+    changePhoto({ Meteor, LocalState, FlowRouter }, url) {
 
     },
 
-    changeAbout({Meteor, LocalState, FlowRouter}, about) {
+    changeAbout({ Meteor, LocalState }, about) {
+        if (!about) {
+            return LocalState.set('PROFILE_ERROR', 'Title is required.');
+        }
 
+        LocalState.set('PROFILE_ERROR', null);
+        LocalState.set('PROFILE_SUCCESS', null);
+
+        const id = Meteor.user()._id;
+        Meteor.call('user.setAbout', about, id, (err) => {
+            if (err) {
+                return LocalState.set('PROFILE_ERROR', err.message);
+            }
+            LocalState.set('PROFILE_SUCCESS', 'Profile about successfully set.');
+        });
+    },
+
+    clearSuccess({LocalState}) {
+        return LocalState.set('PROFILE_SUCCESS', null);
     },
 
     clearErrors({LocalState}) {
