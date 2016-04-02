@@ -90,7 +90,6 @@ class Profile extends React.Component {
 
     render() {
         const { error, user, success } = this.props;
-
         return (
             <div>
                 <Banner image="http://www.intrawallpaper.com/static/images/abstract-mosaic-background.png" message={ user.username } />

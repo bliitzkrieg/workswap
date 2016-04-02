@@ -23,7 +23,9 @@ class ChangeAvatar extends React.Component {
 
     changeAvatar(e) {
         e.preventDefault();
-        const { changePhoto } = this.props;
+        const { changePhoto, clearErrors, clearSuccess } = this.props;
+        clearErrors();
+        clearSuccess();
         changePhoto(this.refs.image.files);
     }
 
