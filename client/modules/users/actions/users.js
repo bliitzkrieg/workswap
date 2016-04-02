@@ -1,17 +1,18 @@
 export default {
+
     create({ Meteor, LocalState, FlowRouter }, username, email, password, file, lat, lng, referral) {
 
-        if(file.length === 0) {
+        if (file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
         }
 
         const five_mb = 1024 * 1024 * 5;
-        if(file[0].size > five_mb) {
+        if (file[0].size > five_mb) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo file size must be less than 5MB');
         }
 
         const file_type = file[0].type;
-        if(file_type !== 'image/jpeg' && file_type !== 'image/png' && file_type !== 'image/jpg') {
+        if (file_type !== 'image/jpeg' && file_type !== 'image/png' && file_type !== 'image/jpg') {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo must be PNG or JPG.');
         }
 
@@ -32,8 +33,8 @@ export default {
         S3.upload({
             files: file,
             path: "profile"
-        }, function(e, response) {
-            if(e) {
+        }, function (e, response) {
+            if (e) {
                 return LocalState.set('CREATE_USER_ERROR', "An error occurred uploading your profile image. Please try again.");
             }
 
@@ -47,14 +48,13 @@ export default {
                     lat: lat,
                     lng: lng,
                     avatar: url
-                }} , function(err) {
-                    if (err)
-                        return LocalState.set('CREATE_USER_ERROR', err.reason);
-                    else
-                        FlowRouter.go('/')
+                }
+            }, function (err) {
+                if (err)
+                    return LocalState.set('CREATE_USER_ERROR', err.reason);
+                else
+                    FlowRouter.go('/')
             });
-
-
         });
     },
 
@@ -69,8 +69,8 @@ export default {
 
         LocalState.set('LOGIN_ERROR', null);
 
-        Meteor.loginWithPassword(email, password, function() {
-            if(redirectTo) {
+        Meteor.loginWithPassword(email, password, function () {
+            if (redirectTo) {
                 FlowRouter.go("/" + redirectTo);
             }
             else {
@@ -79,8 +79,25 @@ export default {
         });
     },
 
-    changePhoto({ Meteor, LocalState, FlowRouter }, url) {
+    changePhoto({ Meteor, LocalState }, file) {
 
+        S3.upload({
+            files: file,
+            path: "profile"
+        }, function (e, response) {
+            if (e) {
+                return LocalState.set('PROFILE_ERROR', "An error occurred uploading your profile image. Please try again.");
+            }
+
+            const url = response.url;
+            const id = Meteor.user()._id;
+            Meteor.call('user.setAvatar', url, id, (err) => {
+                if (err) {
+                    return LocalState.set('PROFILE_ERROR', err.message);
+                }
+                LocalState.set('PROFILE_SUCCESS', 'Avatar successfully changed');
+            });
+        });
     },
 
     changeAbout({ Meteor, LocalState }, about) {

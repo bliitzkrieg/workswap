@@ -1,0 +1,41 @@
+@import "{}/variables.scss";
+@import "{}/mixins.scss";
+
+.change-avatar {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  &:hover {
+    background: rgba(26, 26, 26, 0.7);
+    .change-avatar-input-container {
+      display: flex;
+    }
+    .change-avatar-icon {
+      opacity: 0;
+    }
+  }
+}
+
+.change-avatar-input-container {
+  @include flex(center, center);
+  height: 100%;
+  width: 100%;
+  display: none;
+  color: $workswap-white;
+}
+
+.change-avatar-input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.change-avatar-icon {
+  opacity: 1;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  color: $workswap-white;
+  font-size: 24px;
+}

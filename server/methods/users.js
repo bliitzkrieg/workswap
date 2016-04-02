@@ -33,6 +33,21 @@ export default function () {
             else {
                 throw new Meteor.Error(403, 'User Not Authenticated');
             }
+        },
+
+        'user.setAvatar'(url, id) {
+            check(url, String);
+
+            const user = Meteor.user();
+
+            if(user._id === id) {
+                Meteor.users.update({ _id: user._id }, {
+                    $set: { 'profile.avatar': url }
+                });
+            }
+            else {
+                throw new Meteor.Error(403, 'User Not Authenticated');
+            }
         }
 
     });

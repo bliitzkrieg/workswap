@@ -12,6 +12,7 @@ import UserExchanges from '../exchanges/containers/UserExchanges';
 import FAQ from '../core/components/FAQ/FAQ.jsx';
 import Contact from '../core/components/Contact/Contact.jsx';
 import PublicProfile from '../users/containers/PublicProfile';
+import PageNotFound from '../core/components/PageNotFound/PageNotFound.jsx';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
@@ -139,4 +140,13 @@ export default function (injectDeps, {FlowRouter}) {
             });
         }
     });
+
+    // 404
+    FlowRouter.notFound = {
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<PageNotFound />)
+            });
+        }
+    }
 }

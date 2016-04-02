@@ -10,7 +10,9 @@ class Avatar extends React.Component {
         };
 
         return (
-            <div className="profile-avatar" style={ styles }></div>
+            <div className="profile-avatar" style={ styles }>
+                { this.props.children }
+            </div>
         );
     }
 }

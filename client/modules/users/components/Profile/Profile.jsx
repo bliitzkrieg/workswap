@@ -6,6 +6,7 @@ import JoinedStamp from '../../../core/components/JoinedStamp/JoinedStamp.jsx';
 import Avatar from '../../../core/components/Avatar/Avatar.jsx';
 import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx';
 import Banner from '../../../core/components/Banner/Banner.jsx';
+import ChangeAvatar from '../../containers/ChangeAvatar';
 
 class Profile extends React.Component {
 
@@ -83,6 +84,10 @@ class Profile extends React.Component {
         }
     }
 
+    getChangeAvatar() {
+        return this.props.user._id === Meteor.user()._id ? <ChangeAvatar /> : null;
+    }
+
     render() {
         const { error, user, success } = this.props;
 
@@ -93,7 +98,9 @@ class Profile extends React.Component {
                     <Row>
                         <Col lg={ 12 }>
                             <Well className="profile-container">
-                                <Avatar src={ user.profile.avatar } height="120" width="120"/>
+                                <Avatar src={ user.profile.avatar } height="120" width="120">
+                                    { this.getChangeAvatar() }
+                                </Avatar>
                                 <div className="profile-details">
                                     <JoinedStamp joined={ user.profile.createdAt } />
                                     <Verified verified={ user.emails[0].verified } />
@@ -109,16 +116,6 @@ class Profile extends React.Component {
                 </Grid>
             </div>
         )
-    }
-
-    changePhoto(e) {
-        e.preventDefault();
-        const { changePhoto } = this.props;
-        //const email = this.refs.email.refs.input;
-        //const password = this.refs.password.refs.input;
-        //loginUser(email.value, password.value, this.props.redirectTo);
-        //email.value = '';
-        //password.value = '';
     }
 
     changeUserAbout(e) {
