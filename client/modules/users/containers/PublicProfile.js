@@ -17,7 +17,7 @@ export const composer = ({ context, clearErrors }, onData) => {
         const user = Meteor.users.findOne(params);
 
         if (Meteor.subscribe('ratings.list', user._id).ready()) {
-            const ratings = Collections.Ratings.find({user: user._id}).fetch();
+            const ratings = Collections.Ratings.find({ user: user._id }).fetch();
             onData(null, { user, ratings, error, success });
         } else {
             onData();
