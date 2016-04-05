@@ -30,3 +30,8 @@ main {
 .well {
     background-color: $workswap-white;
 }
+
+.container {
+    position: relative;
+    z-index: 1;
+}

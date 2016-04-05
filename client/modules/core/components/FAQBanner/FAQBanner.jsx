@@ -1,10 +1,12 @@
 import React from 'react';
+import Overlay from '../Overlay/Overlay.jsx';
 
 class FAQCTA extends React.Component {
 
     render() {
         return (
             <div className="faq-cta">
+                <Overlay />
                 <div className="faq-cta-banner">
                     <h1>Frequently Asked Questions</h1>
                     <h4 className="faq-details">

@@ -1,5 +1,18 @@
 @import "{}/variables.scss";
+@import "{}/mixins.scss";
 
 .footer-links a {
   color: $workswap-black;
+}
+
+@include mobile {
+
+  footer {
+    text-align: center;
+  }
+
+  .footer-logo {
+    float: none !important;
+  }
+
 }

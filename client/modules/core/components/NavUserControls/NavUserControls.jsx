@@ -16,23 +16,27 @@ class UserControl extends React.Component {
 
     getLoggedIn() {
         return (
-            <NavDropdown eventKey={5} title={ this.getAvatar() } id="basic-nav-dropdown">
-                <MenuItem eventKey={5.1} href="/profile">Your Profile</MenuItem>
-                <MenuItem eventKey={5.2} href="/create">Create Exchange</MenuItem>
-                <MenuItem eventKey={5.3} href="/user/exchanges">Your Exchanges</MenuItem>
-                <MenuItem eventKey={5.4} href="/user/messages">Messages <Badge>5</Badge></MenuItem>
-                <MenuItem eventKey={5.5} href="/user/offers">Offers <Badge>2</Badge></MenuItem>
-                <MenuItem divider />
-                <MenuItem eventKey={5.6} href="/logout">Logout</MenuItem>
-            </NavDropdown>
+            <Nav pullRight>
+                <NavItem eventKey={5} href="/discover">Discover</NavItem>
+                <NavDropdown eventKey={5} title={ this.getAvatar() } id="basic-nav-dropdown">
+                    <MenuItem eventKey={5.1} href="/profile">Your Profile</MenuItem>
+                    <MenuItem eventKey={5.2} href="/create">Create Exchange</MenuItem>
+                    <MenuItem eventKey={5.3} href="/user/exchanges">Your Exchanges</MenuItem>
+                    <MenuItem eventKey={5.4} href="/user/messages">Messages <Badge>5</Badge></MenuItem>
+                    <MenuItem eventKey={5.5} href="/user/offers">Offers <Badge>2</Badge></MenuItem>
+                    <MenuItem divider />
+                    <MenuItem eventKey={5.6} href="/logout">Logout</MenuItem>
+                </NavDropdown>
+            </Nav>
         );
     }
 
     getGuest() {
         return (
-            <Nav>
-                <NavItem eventKey={5} href="/login">Login</NavItem>
-                <NavItem eventKey={6} href="/register">Register</NavItem>
+            <Nav pullRight>
+                <NavItem eventKey={5} href="/discover">Discover</NavItem>
+                <NavItem eventKey={6} href="/login">Login</NavItem>
+                <NavItem eventKey={7} href="/register">Register</NavItem>
             </Nav>
         );
     }

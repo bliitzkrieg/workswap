@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavItem, Navbar, Nav, Input, Button } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 import UserControls from '../NavUserControls/NavUserControls.jsx';
 import HeaderSearch from '../HeaderSearch/HeaderSearch.jsx';
 
@@ -16,10 +16,7 @@ class Header extends React.Component {
                     </Navbar.Brand>
                 </Navbar.Header>
                 <HeaderSearch />
-                <Nav pullRight>
-                    <NavItem eventKey={2} href="/discover">Discover</NavItem>
-                    <UserControls username={ this.props.username } avatar={ this.props.avatar } />
-                </Nav>
+                <UserControls username={ this.props.username } avatar={ this.props.avatar } />
             </Navbar>
         );
     }

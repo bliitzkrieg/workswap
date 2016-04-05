@@ -1,6 +1,8 @@
 @import "{}/variables.scss";
+@import "{}/mixins.scss";
 
 .cta-home {
+  position: relative;
   height: 400px;
   margin-top: -20px;
   margin-bottom: 20px;
@@ -14,9 +16,32 @@
     text-align: center;
     font-size: 72px;
     font-weight: 100;
-    color: $workswap-black;
+    color: $workswap-white;
   }
   .form-group {
     max-width: 500px;
   }
+}
+
+@include mobile {
+
+  .cta-home {
+    padding: 55px;
+    h1 {
+      font-size: 35px;
+      margin-top: -50px;
+    }
+  }
+
+}
+
+@include tablet {
+
+  .cta-home {
+    h1 {
+      font-size: 55px;
+      margin-top: -50px;
+    }
+  }
+
 }

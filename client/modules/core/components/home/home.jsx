@@ -5,7 +5,7 @@ import HomeCTA from '../HomeCTA/HomeCTA.jsx';
 const Home = () => (
     <div>
         <HomeCTA />
-        <Grid className="container">
+        <Grid>
             <Row>
                 <Col lg={ 12 }>
                    <Well className="home-well">
