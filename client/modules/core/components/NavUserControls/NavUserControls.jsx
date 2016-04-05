@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavDropdown, MenuItem, NavItem, Badge, Nav, Image } from 'react-bootstrap';
+import Avatar from '../Avatar/Avatar.jsx';
 
 class UserControl extends React.Component {
 
@@ -7,7 +8,7 @@ class UserControl extends React.Component {
         const { username, avatar } = this.props;
         return (
             <span>
-                <Image src={ avatar } alt={ username } rounded height="20" width="20" className="avatar" />
+                <Avatar cls="user-control-avatar" src={ avatar } height="20" width="20" />
                 { username }
             </span>
         )

@@ -92,12 +92,12 @@ class Profile extends React.Component {
         const { error, user, success } = this.props;
         return (
             <div>
-                <Banner image="http://www.intrawallpaper.com/static/images/abstract-mosaic-background.png" message={ user.username } />
+                <Banner image="/images/profile_bg.png" message={ user.username } />
                 <Grid>
                     <Row>
                         <Col lg={ 12 }>
                             <Well className="profile-container">
-                                <Avatar src={ user.profile.avatar } height="120" width="120">
+                                <Avatar cls="profile-avatar" src={ user.profile.avatar } height="120" width="120">
                                     { this.getChangeAvatar() }
                                 </Avatar>
                                 <div className="profile-details">

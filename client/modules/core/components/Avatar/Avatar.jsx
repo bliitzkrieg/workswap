@@ -9,8 +9,10 @@ class Avatar extends React.Component {
             width: this.props.width || '120'
         };
 
+        const cls = this.props.cls ? 'avatar' + ' ' + this.props.cls : 'avatar';
+
         return (
-            <div className="profile-avatar" style={ styles }>
+            <div className={ cls } style={ styles }>
                 { this.props.children }
             </div>
         );
