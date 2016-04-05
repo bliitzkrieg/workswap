@@ -18,7 +18,12 @@ export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
     const FullLayoutCtx = injectDeps(FullLayout);
 
-    const publicRoutes = FlowRouter.group( { name: 'public' } );
+    const publicRoutes = FlowRouter.group( {
+        name: 'public',
+        triggersEnter: [function(context) {
+            GAnalytics.pageview(context.path);
+        }]
+    } );
 
     publicRoutes.route('/', {
         name: 'home',
@@ -92,8 +97,20 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
+    publicRoutes.route('/discover', {
+        name: 'exchanges.list',
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<ListExchange />)
+            });
+        }
+    });
+
     const authenticatedRoutes = FlowRouter.group( {
-        name: 'authenticated'
+        name: 'authenticated',
+        triggersEnter: [function(context) {
+            GAnalytics.pageview(context.path);
+        }]
     } );
 
     authenticatedRoutes.route('/profile', {
@@ -110,15 +127,6 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 content: (<CreateExchange />)
-            });
-        }
-    });
-
-    authenticatedRoutes.route('/discover', {
-        name: 'exchanges.list',
-        action() {
-            mount(MainLayoutCtx, {
-                content: (<ListExchange />)
             });
         }
     });

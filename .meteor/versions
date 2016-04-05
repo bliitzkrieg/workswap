@@ -17,6 +17,7 @@ callback-hook@1.0.6
 check@1.1.2
 chuangbo:cookie@1.1.0
 coffeescript@1.0.15
+datariot:ganalytics@0.2.1
 dburles:mongo-collection-instances@0.3.5
 ddp@1.2.3
 ddp-client@1.2.3
