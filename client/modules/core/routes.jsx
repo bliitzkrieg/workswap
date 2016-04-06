@@ -18,6 +18,10 @@ export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
     const FullLayoutCtx = injectDeps(FullLayout);
 
+    // ********************
+    // Public Routes
+    // ********************
+
     const publicRoutes = FlowRouter.group( {
         name: 'public',
         triggersEnter: [function(context) {
@@ -106,6 +110,10 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
+    // ********************
+    // Authenticated Routes
+    // ********************
+
     const authenticatedRoutes = FlowRouter.group( {
         name: 'authenticated',
         triggersEnter: [function(context) {
@@ -148,6 +156,30 @@ export default function (injectDeps, {FlowRouter}) {
             });
         }
     });
+
+    // ********************
+    // Admin Routes
+    // ********************
+
+    const adminRoutes = FlowRouter.group( {
+        name: 'admin',
+        triggersEnter: [function(context) {
+            GAnalytics.pageview(context.path);
+        }]
+    } );
+
+    adminRoutes.route('/admin', {
+        name: 'admin.dashboard',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<AdminDashboard />)
+            });
+        }
+    });
+
+    // ********************
+    // 404
+    // ********************
 
     // 404
     FlowRouter.notFound = {
