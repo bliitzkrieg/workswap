@@ -13,6 +13,7 @@ export default function () {
 
         profile.createdAt = new Date();
         profile.about = null;
+        profile.admin = false;
 
         user.profile = profile;
         return user;

@@ -13,6 +13,7 @@ import FAQ from '../core/components/FAQ/FAQ.jsx';
 import Contact from '../core/components/Contact/Contact.jsx';
 import PublicProfile from '../users/containers/PublicProfile';
 import PageNotFound from '../core/components/PageNotFound/PageNotFound.jsx';
+import AdminDashboard from '../admin/containers/AdminDashboard';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
@@ -163,15 +164,20 @@ export default function (injectDeps, {FlowRouter}) {
 
     const adminRoutes = FlowRouter.group( {
         name: 'admin',
-        triggersEnter: [function(context) {
+        triggersEnter: [function(context, redirect) {
             GAnalytics.pageview(context.path);
+            const user = Meteor.user();
+
+            if(!user || !user.profile.admin)
+                redirect('/');
+
         }]
     } );
 
     adminRoutes.route('/admin', {
         name: 'admin.dashboard',
         action() {
-            mount(FullLayoutCtx, {
+            mount(MainLayoutCtx, {
                 content: (<AdminDashboard />)
             });
         }

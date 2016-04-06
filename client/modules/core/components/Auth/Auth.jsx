@@ -5,7 +5,7 @@ import Home from '../Home/Home.jsx';
 class Auth extends React.Component {
 
     checkAuth() {
-        if(this.props.user){
+        if(this.props.user) {
             return (<Dashboard />);
         }
         return (<Home />);

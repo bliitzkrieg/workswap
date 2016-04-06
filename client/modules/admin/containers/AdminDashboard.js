@@ -1,10 +1,11 @@
-import AdminDashboard from '../components/ListExchange/ListExchanges.jsx';
+import AdminDashboard from '../components/AdminDashboard/AdminDashboard.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({ context, clearErrors }, onData) => {
     const { Meteor, Collections } = context();
+    const user = Meteor.user();
 
-    onData();
+    onData(null, { user });
 };
 
 export default composeAll(

@@ -6,4 +6,10 @@ export default function () {
         return Meteor.users.find({ username },
             {fields: {'username': 1, 'profile.avatar': 1, 'createdAt': 1, 'emails.verified' : 1}});
     });
+
+    Meteor.users.deny({
+        update: function() {
+            return true;
+        }
+    });
 }
