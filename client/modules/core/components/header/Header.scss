@@ -1,5 +1,9 @@
 @import "{}/mixins.scss";
 
+.navbar {
+  z-index: 2;
+}
+
 @include mobile {
 
   .navbar-header {

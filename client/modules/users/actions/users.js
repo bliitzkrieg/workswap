@@ -52,8 +52,10 @@ export default {
             }, function (err) {
                 if (err)
                     return LocalState.set('CREATE_USER_ERROR', err.reason);
-                else
+                else {
+                    Bert.alert( 'Welcome! Your account has been created.', 'success', 'growl-top-right' );
                     FlowRouter.go('/')
+                }
             });
         });
     },
@@ -70,6 +72,9 @@ export default {
         LocalState.set('LOGIN_ERROR', null);
 
         Meteor.loginWithPassword(email, password, function () {
+
+            Bert.alert( 'Wooh! Login Successful.', 'success', 'growl-top-right' );
+
             if (redirectTo) {
                 FlowRouter.go("/" + redirectTo);
             }
@@ -108,7 +113,8 @@ export default {
                 if (err) {
                     return LocalState.set('PROFILE_ERROR', err.message);
                 }
-                LocalState.set('PROFILE_SUCCESS', 'Avatar successfully changed');
+
+                Bert.alert( 'Sucess, your avatar has been changed.', 'success', 'growl-top-right' );
             });
         });
     },
@@ -126,7 +132,8 @@ export default {
             if (err) {
                 return LocalState.set('PROFILE_ERROR', err.message);
             }
-            LocalState.set('PROFILE_SUCCESS', 'About successfully set');
+
+            Bert.alert( 'Success, your about has been updated.', 'success', 'growl-top-right' );
         });
     },
 
