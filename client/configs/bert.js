@@ -8,7 +8,7 @@ export default function () {
 
     // Bert Configuration
     Bert.defaults = {
-        hideDelay: 4500
+        hideDelay: 7500
     };
 
 }

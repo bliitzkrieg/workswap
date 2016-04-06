@@ -35,7 +35,8 @@ export default {
             path: "profile"
         }, function (e, response) {
             if (e) {
-                return LocalState.set('CREATE_USER_ERROR', "An error occurred uploading your profile image. Please try again.");
+                Bert.alert( 'Sorry! Something went wrong uploading your image. Please try again', 'danger', 'growl-top-right' );
+                return false;
             }
 
             const url = response.url;
@@ -50,8 +51,10 @@ export default {
                     avatar: url
                 }
             }, function (err) {
-                if (err)
-                    return LocalState.set('CREATE_USER_ERROR', err.reason);
+                if (err) {
+                    Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                    return false;
+                }
                 else {
                     Bert.alert( 'Welcome! Your account has been created.', 'success', 'growl-top-right' );
                     FlowRouter.go('/')
@@ -71,7 +74,12 @@ export default {
 
         LocalState.set('LOGIN_ERROR', null);
 
-        Meteor.loginWithPassword(email, password, function () {
+        Meteor.loginWithPassword(email, password, function (err) {
+
+            if (err) {
+                Bert.alert( 'Darn, We couldn\'t log you in. The reason:  ' + err.reason, 'danger', 'growl-top-right' );
+                return false;
+            }
 
             Bert.alert( 'Wooh! Login Successful.', 'success', 'growl-top-right' );
 
@@ -104,17 +112,19 @@ export default {
             path: "profile"
         }, function (e, response) {
             if (e) {
-                return LocalState.set('PROFILE_ERROR', "An error occurred uploading your profile image. Please try again.");
+                Bert.alert( 'Sorry! Something went wrong uploading your image. Please try again', 'danger', 'growl-top-right' );
+                return false;
             }
 
             const url = response.url;
             const id = Meteor.user()._id;
             Meteor.call('user.setAvatar', url, id, (err) => {
                 if (err) {
-                    return LocalState.set('PROFILE_ERROR', err.message);
+                    Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                    return false;
                 }
 
-                Bert.alert( 'Sucess, your avatar has been changed.', 'success', 'growl-top-right' );
+                Bert.alert( 'Success, your avatar has been changed.', 'success', 'growl-top-right' );
             });
         });
     },
@@ -130,7 +140,8 @@ export default {
         const id = Meteor.user()._id;
         Meteor.call('user.setAbout', about, id, (err) => {
             if (err) {
-                return LocalState.set('PROFILE_ERROR', err.message);
+                Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                return false;
             }
 
             Bert.alert( 'Success, your about has been updated.', 'success', 'growl-top-right' );
