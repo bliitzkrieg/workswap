@@ -94,17 +94,20 @@ export default {
 
     changePhoto({ Meteor, LocalState }, file) {
         if (file.length === 0) {
-            return LocalState.set('PROFILE_ERROR', 'Profile Photo is required.');
+            Bert.alert( 'Hey!, the Profile Photo is required.', 'danger', 'growl-top-right' );
+            return null;
         }
 
         const five_mb = 1024 * 1024 * 5;
         if (file[0].size > five_mb) {
-            return LocalState.set('PROFILE_ERROR', 'Profile Photo file size must be less than 5MB');
+            Bert.alert( 'Too big, your Profile Photo must be less than 5MB', 'danger', 'growl-top-right' );
+            return null;
         }
 
         const file_type = file[0].type;
         if (file_type !== 'image/jpeg' && file_type !== 'image/png' && file_type !== 'image/jpg') {
-            return LocalState.set('PROFILE_ERROR', 'Profile Photo must be PNG or JPG.');
+            Bert.alert( 'Wrong Type, your Profile Photo must be PNG or JPG.', 'danger', 'growl-top-right' );
+            return null;
         }
 
         S3.upload({
@@ -130,9 +133,6 @@ export default {
     },
 
     changeAbout({ Meteor, LocalState }, about) {
-        if (!about) {
-            return LocalState.set('PROFILE_ERROR', 'Title is required.');
-        }
 
         LocalState.set('PROFILE_ERROR', null);
         LocalState.set('PROFILE_SUCCESS', null);

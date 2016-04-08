@@ -123,7 +123,7 @@ class Profile extends React.Component {
         const about = this.refs.about.refs.input;
         const user = this.props.user;
 
-        if(about.length !== 0 || about !== user.profile.about) {
+        if(about.value !== user.profile.about) {
             changeAbout(about.value);
         }
     }
