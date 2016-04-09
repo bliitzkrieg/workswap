@@ -8,7 +8,7 @@ class Stars extends React.Component {
         const cls = 'stars-container active-stars-' + Math.round(this.props.rating) + ' ' + this.props.cls;
 
         return (
-            <div className={ cls } { ...this.props }>
+            <div className={ cls } { ...this.props } title={ this.props.rating + ' Stars' }>
                 <Glyphicon glyph="star" className="star-item"/>
                 <Glyphicon glyph="star" className="star-item"/>
                 <Glyphicon glyph="star" className="star-item"/>
