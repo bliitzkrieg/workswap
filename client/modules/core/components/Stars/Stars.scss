@@ -1,0 +1,33 @@
+.star-item {
+  color: #D8D8D8;
+}
+
+.active-stars-1 {
+  .star-item:first-child {
+    color: #FFBE59;
+  }
+}
+
+.active-stars-2 {
+  .star-item:nth-child(-n+2){
+    color: #FFBE59;
+  }
+}
+
+.active-stars-3 {
+  .star-item:nth-child(-n+3){
+    color: #FFBE59;
+  }
+}
+
+.active-stars-4 {
+  .star-item:nth-child(-n+4){
+    color: #FFBE59;
+  }
+}
+
+.active-stars-5 {
+  .star-item {
+    color: #FFBE59;
+  }
+}

@@ -25,7 +25,6 @@ twbs:bootstrap
 mdg:geolocation
 fourseven:scss
 meteortoys:allthings
-alanning:roles
 momentjs:moment
 lepozepo:s3
 seba:minifiers-autoprefixer

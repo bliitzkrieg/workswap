@@ -13,7 +13,7 @@ export default function () {
                 const review = {
                     _id: Meteor.uuid(),
                     user: user_id,
-                    rating: 10,
+                    rating: 5,
                     submitter: 'SYSTEM',
                     createdAt
                 };

@@ -32,6 +32,12 @@
   left: 30px;
 }
 
+.profile-ratings {
+  position: absolute;
+  top: 65px;
+  left: 56px;
+}
+
 @include mobile {
 
   .profile-avatar {
