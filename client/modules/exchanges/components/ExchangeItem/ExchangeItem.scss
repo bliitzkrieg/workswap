@@ -1,9 +1,29 @@
 @import "{}/variables.scss";
+@import "{}/mixins";
 
 .exchange-item {
-  height: 80px;
-  padding: 20px;
+  height: 60px;
   border-radius: 5px;
   border: 1px solid #E8E8E8;
   background: $workswap-white;
+  overflow: hidden;
+  margin: 10px 0;
+  @include flex(space-between, center);
+}
+
+.exchange-item-avatar-no-radius {
+  border-radius: 0;
+}
+
+.exchange-item-avatar-container {
+  @include flex(center, center, row)
+}
+
+.exchange-item-detail {
+  margin-left: 10px;
+  flex: 1;
+}
+
+.exchange-item-actions {
+  margin-right: 10px;
 }

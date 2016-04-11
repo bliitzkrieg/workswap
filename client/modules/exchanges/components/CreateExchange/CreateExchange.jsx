@@ -40,11 +40,11 @@ class CreateExchange extends React.Component {
     }
 
     render() {
-        const {error} = this.props;
+        const { error } = this.props;
         return (
             <div>
                 <h1>Create Exchange</h1>
-                {error ? <p style={{color: 'red'}}>{error}</p> : null}
+                { error ? <p style={{color: 'red'}}>{error}</p> : null }
                 <form>
 
                     <ServiceList label="What are you looking for?" callback={ this.onRequestCB.bind(this) } />
@@ -54,8 +54,9 @@ class CreateExchange extends React.Component {
                     <Input ref="details" type="textarea" label="Give a little more details" placeholder="I am building a todo app and need a designer to help style a component..." />
 
                     <Input ref="remote" type="select" label="Remote or Local?" placeholder="Remote">
-                        <option value="remote">Remote</option>
-                        <option value="local">Local</option>
+                        <option value="either">Remote or Local</option>
+                        <option value="remote">Remote Only</option>
+                        <option value="local">Local Only</option>
                     </Input>
 
                     <input ref="lat" value={ this.state.lat } type="hidden"/>

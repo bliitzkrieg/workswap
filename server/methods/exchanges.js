@@ -28,9 +28,10 @@ export default function () {
                     remote,
                     user: {
                         _id: user._id,
-                        username: user.username
+                        username: user.username,
+                        avatar: user.profile.avatar
                     },
-                    coords: {
+                    location: {
                         lat,
                         lng
                     },

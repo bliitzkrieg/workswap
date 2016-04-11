@@ -34,8 +34,14 @@
 .change-avatar-icon {
   opacity: 1;
   position: absolute;
-  bottom: 0;
-  left: 10px;
+  bottom: 5px;
+  left: 5px;
   color: $workswap-white;
   font-size: 24px;
+  display: flex;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.40);
+  height: 27px;
+  width: 30px;
+  border-radius: 5px;
 }

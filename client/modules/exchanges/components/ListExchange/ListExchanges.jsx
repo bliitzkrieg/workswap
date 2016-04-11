@@ -22,6 +22,7 @@ class ListExchanges extends React.Component {
 
         return (
             <div>
+                <h2>Discover Swaps Around You</h2>
                 { this.buildList() }
             </div>
         )
