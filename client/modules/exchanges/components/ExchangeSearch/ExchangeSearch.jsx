@@ -25,9 +25,7 @@ class ExchangeSearch extends React.Component {
         //const offerType = this.state.offer;
         //const title = this.refs.title.refs.input;
         //const details = this.refs.details.refs.input;
-        //const remote = this.refs.remote.refs.input;
-        //const {lat, lng} = this.refs;
-        //create(requestType.value, offerType.value, title.value, details.value, remote.value, lat.value, lng.value);
+        //create(requestType.value, offerType.value, title.value, details.value);
     }
 }
 

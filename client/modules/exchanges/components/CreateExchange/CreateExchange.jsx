@@ -6,25 +6,13 @@ class CreateExchange extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            lng: null,
-            lat: null
-        };
+        this.state = { };
     }
 
     componentDidMount() {
         if(!Meteor.user()) {
             FlowRouter.go('/login/create');
         }
-
-        var that = this;
-
-        navigator.geolocation.getCurrentPosition(function(geolocation) {
-            that.setState({
-                lat: geolocation.coords.latitude,
-                lng: geolocation.coords.longitude
-            });
-        });
     }
 
     onRequestCB(value) {
@@ -53,14 +41,6 @@ class CreateExchange extends React.Component {
                     <Input ref="title" type="text" label="Your exchange Title" placeholder="Developer Looking For Designer" />
                     <Input ref="details" type="textarea" label="Give a little more details" placeholder="I am building a todo app and need a designer to help style a component..." />
 
-                    <Input ref="remote" type="select" label="Remote or Local?" placeholder="Remote">
-                        <option value="either">Remote or Local</option>
-                        <option value="remote">Remote Only</option>
-                        <option value="local">Local Only</option>
-                    </Input>
-
-                    <input ref="lat" value={ this.state.lat } type="hidden"/>
-                    <input ref="lng" value={ this.state.lng } type="hidden"/>
                     <ButtonInput onClick={ this.createExchange.bind(this) }
                                  value="Create"
                                  type="submit" />
@@ -76,9 +56,7 @@ class CreateExchange extends React.Component {
         const offerType = this.state.offer;
         const title = this.refs.title.refs.input;
         const details = this.refs.details.refs.input;
-        const remote = this.refs.remote.refs.input;
-        const {lat, lng} = this.refs;
-        create(requestType, offerType, title.value, details.value, remote.value, lat.value, lng.value);
+        create(requestType, offerType, title.value, details.value);
     }
 }
 

@@ -5,15 +5,12 @@ import { check } from 'meteor/check';
 export default function () {
 
     Meteor.methods({
-        'exchanges.create'(_id, requestType, offerType, title, details, remote, lat, lng) {
+        'exchanges.create'(_id, requestType, offerType, title, details) {
             check(_id, String);
             check(requestType, String);
             check(offerType, String);
             check(title, String);
             check(details, String);
-            check(remote, String);
-            check(lat, String);
-            check(lng, String);
 
 
             let user = Meteor.user();
@@ -25,15 +22,10 @@ export default function () {
                     offerType,
                     title,
                     details,
-                    remote,
                     user: {
                         _id: user._id,
                         username: user.username,
                         avatar: user.profile.avatar
-                    },
-                    location: {
-                        lat,
-                        lng
                     },
                     createdAt
                 };

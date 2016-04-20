@@ -1,6 +1,6 @@
 export default {
 
-    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, lat, lng, referral) {
+    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, referral) {
 
         if (file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
@@ -46,8 +46,6 @@ export default {
                 password,
                 profile: {
                     referral: referral,
-                    lat: lat,
-                    lng: lng,
                     avatar: url
                 }
             }, function (err) {

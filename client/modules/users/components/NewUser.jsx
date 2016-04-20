@@ -6,22 +6,7 @@ class NewUser extends React.Component {
 
     constructor() {
         super();
-        this.state = {
-            lng: null,
-            lat: null
-        };
     }
-
-    componentDidMount() {
-            var that = this;
-
-            navigator.geolocation.getCurrentPosition(function(geolocation) {
-                that.setState({
-                    lat: geolocation.coords.latitude,
-                    lng: geolocation.coords.longitude
-                });
-            });
-        }
 
     render() {
         const {error} = this.props;
@@ -33,8 +18,6 @@ class NewUser extends React.Component {
                     <Input ref="username" type="text" label="Username" placeholder="Username" />
                     <Input ref="email" type="email" label="Email" placeholder="Email" />
                     <Input ref="password" type="password" label="Password" placeholder="Password" />
-                    <input ref="lat" value={ this.state.lat } type="hidden"/>
-                    <input ref="lng" value={ this.state.lng } type="hidden"/>
                     <Input ref="profile_photo" type="file" label="Profile Photo" help="Upload a profile Picture" />
                     <ButtonInput onClick={this.createUser.bind(this)}
                                  value="Sign Up"
@@ -47,14 +30,13 @@ class NewUser extends React.Component {
     createUser(e) {
         e.preventDefault();
         const { create } = this.props;
-        const { lat, lng } = this.refs;
         const username = this.refs.username.refs.input;
         const email = this.refs.email.refs.input;
         const password = this.refs.password.refs.input;
         const referral = this.props.invite;
         const file = this.refs.profile_photo.refs.input.files;
 
-        create(username.value, email.value, password.value, file, lat.value, lng.value, referral);
+        create(username.value, email.value, password.value, file, referral);
     }
 }
 

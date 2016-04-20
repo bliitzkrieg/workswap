@@ -1,7 +1,7 @@
 import ExchangeMethods from '../methods/exchanges';
 
 export default {
-    create({Meteor, LocalState, FlowRouter}, requestType, offerType, title, details, remote, lat, lng) {
+    create({Meteor, LocalState, FlowRouter}, requestType, offerType, title, details) {
         if (requestType === 'select') {
             return LocalState.set('CREATE_EXCHANGE_ERROR', 'Request Type is required.');
         }
@@ -18,14 +18,10 @@ export default {
             return LocalState.set('CREATE_EXCHANGE_ERROR', 'Details are required.');
         }
 
-        if (!remote) {
-            return LocalState.set('CREATE_EXCHANGE_ERROR', 'Remote is required.');
-        }
-
         LocalState.set('CREATE_EXCHANGE_ERROR', null);
 
         const id = Meteor.uuid();
-        Meteor.call('exchanges.create', id, requestType, offerType, title, details, remote, lat, lng, (err) => {
+        Meteor.call('exchanges.create', id, requestType, offerType, title, details, (err) => {
             if (err) {
                 return LocalState.set('CREATE_EXCHANGE_ERROR', err.message);
             }

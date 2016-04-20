@@ -123,7 +123,6 @@ export default function () {
     function seed () {
 
         const count = Services.find({}).count();
-        console.log(count);
 
         if(count === 0) {
             ServiceData.forEach(function(item) {

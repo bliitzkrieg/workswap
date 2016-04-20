@@ -24,7 +24,7 @@ export default function () {
                 //todo: refactor to something cleaner
                 const invitation_id = Invitation.insert(invitation);
                 const redirect = "http://" + process.env.SITE_URL + "/invite/" + invitation_id;
-                const template = "Hi " + recipientName + "!<br/><br/><br/>" + user.emails[0].address + " has invited you to use workswap, a exchange of service platform. Have a service to offer? Trade services with local or remote users! <br/><br/><br/><a href='" + redirect + "'>Register here</a>";
+                const template = "Hi " + recipientName + "!<br/><br/><br/>" + user.emails[0].address + " has invited you to use workswap, a exchange of service platform. Have a service to offer? <br/><br/><br/><a href='" + redirect + "'>Register here</a>";
                 Email.send({
                     to: recipient,
                     from: 'donotreply@workswap.io',

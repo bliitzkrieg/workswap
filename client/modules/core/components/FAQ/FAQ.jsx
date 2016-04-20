@@ -11,7 +11,7 @@ class FAQ extends React.Component {
                 <div className="container">
                     <Accordion>
                         <Panel header="What is workswap?" eventKey="1">
-                            Workswap is a platform to make it easy to find exchange of services with remote and local users.
+                            Workswap is a platform to make it easy to find exchange of services.
                         </Panel>
                         <Panel header="What is an exchange of service?" eventKey="2">
                             An exchange of service is a agreement to do a task for another individual. In return they return the favor and complete work for you.
