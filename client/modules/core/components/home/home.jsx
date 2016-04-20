@@ -9,7 +9,7 @@ const Home = () => (
             <Row>
                 <Col lg={ 12 }>
                    <Well className="home-well">
-                        <h2 className="heading">Trending</h2>
+                        <h2 className="heading">Hot Right Now</h2>
                         15 Results
                    </Well>
                 </Col>
@@ -17,7 +17,7 @@ const Home = () => (
             <Row>
                 <Col lg={ 12 }>
                     <Well className="white-well">
-                        <h2 className="heading">Newest</h2>
+                        <h2 className="heading">Just Posted</h2>
                         15 Results
                     </Well>
                 </Col>
