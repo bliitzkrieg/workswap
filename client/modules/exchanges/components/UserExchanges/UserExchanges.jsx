@@ -10,7 +10,6 @@ class UserExchanges extends React.Component {
                 </div>
             )
         }
-        console.log(this.props.exchanges);
         return this.props.exchanges.map(function(item) {
             return (
                 <div key={item._id} className="test-class">

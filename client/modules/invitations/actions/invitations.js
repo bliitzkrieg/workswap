@@ -13,15 +13,17 @@ export default {
         //Todo: Validate Email
 
         LocalState.set('SEND_INVITATIONS_ERROR', null);
+        LocalState.set('INVITATIONS_FORM_CLEAR', null);
     
         const id = Meteor.uuid();
         Meteor.call('invitations.send', id, recipientName, recipient, (err) => {
             if (err) {
-                return LocalState.set('SEND_INVITATIONS_ERROR', err.message);
+                Bert.alert( 'Hmm! Something went wrong. Please try again.', 'danger', 'growl-top-right' );
+                return false;
             }
 
-            // todo: Give some type of notification
-            console.log('it worked');
+            Bert.alert( 'Yay! Your friend has been invited!', 'success', 'growl-top-right' );
+            LocalState.set('INVITATIONS_FORM_CLEAR', true);
         });
     },
 

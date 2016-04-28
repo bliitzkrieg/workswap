@@ -4,7 +4,6 @@ import { Glyphicon } from 'react-bootstrap';
 class Stars extends React.Component {
 
     buildStars() {
-        console.log(this.props.rating);
         const cls = 'stars-container active-stars-' + Math.round(this.props.rating) + ' ' + this.props.cls;
 
         return (

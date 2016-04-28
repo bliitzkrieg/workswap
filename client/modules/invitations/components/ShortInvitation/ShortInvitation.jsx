@@ -5,10 +5,13 @@ import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx
 class ShortInvitation extends React.Component {
 
     render() {
-        const { error } = this.props;
+
+        if(this.props.clear) {
+            this.refs.sender.refs.input.value = this.refs.recipient.refs.input.value = null;
+        }
+
         return (
             <Well>
-                <AlertMessage type='danger' message={ error } />
                 <div className="ShortInvitation-prompt">Have a friend that would love this? <br/><br/> Send them an invitation!</div>
                 <Input type="text" placeholder="Your Name" label="Your Name" ref="sender"/>
                 <Input type="email" placeholder="Your Friends Email" label="Your Friends Email" ref="recipient"/>

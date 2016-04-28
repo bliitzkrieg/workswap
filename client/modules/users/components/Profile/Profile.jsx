@@ -82,7 +82,7 @@ class Profile extends React.Component {
         this.setState({
             profession: value
         });
-        this.changeProfession();
+        this.changeProfession(value);
     }
 
     getProfessionUpdate() {
@@ -148,9 +148,8 @@ class Profile extends React.Component {
         }
     }
 
-    changeProfession() {
+    changeProfession(profession) {
         const { changeProfession } = this.props;
-        const profession = this.state.profession;
         const user = this.props.user;
 
         if(profession !== user.profile.profession) {
