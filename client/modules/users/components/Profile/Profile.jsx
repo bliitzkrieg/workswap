@@ -34,6 +34,7 @@ class Profile extends React.Component {
     }
 
     getAbout() {
+        const about = this.props.user.profile.about;
         if(this.isAuthenticated()) {
             return (
                 <Input label={ 'About ' + this.props.user.username } type="textarea" placeholder="Enter a bit about yourself"
@@ -44,7 +45,7 @@ class Profile extends React.Component {
             );
         }
         else {
-            if(this.props.user.profile.about.length !== 0) {
+            if(about && about.length !== 0) {
                 return (
                     <div className="profile-about">{ this.props.user.profile.about }</div>
                 );
@@ -121,7 +122,7 @@ class Profile extends React.Component {
                                 <Stars rating={ this.getAverage() } cls="profile-ratings"/>
                                 { this.getProfessionDisplay() }
                                 <div className="profile-details">
-                                    <JoinedStamp joined={ user.profile.createdAt } />
+                                    <JoinedStamp joined={ user.createdAt || user.profile.createdAt } />
                                     <Verified verified={ user.emails[0].verified } />
                                 </div>
                                 <AlertMessage type='danger' message={ error } />
