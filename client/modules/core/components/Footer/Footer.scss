@@ -1,6 +1,11 @@
 @import "{}/variables.scss";
 @import "{}/mixins.scss";
 
+footer {
+  z-index: -1;
+  position: relative;
+}
+
 .footer-links a {
   color: $workswap-black;
 }

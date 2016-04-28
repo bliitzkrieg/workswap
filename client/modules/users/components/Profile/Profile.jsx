@@ -7,14 +7,20 @@ import Avatar from '../../../core/components/Avatar/Avatar.jsx';
 import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx';
 import Banner from '../../../core/components/Banner/Banner.jsx';
 import ChangeAvatar from '../../containers/ChangeAvatar';
+import ServiceList from '../../../exchanges/containers/ServiceList';
 
 class Profile extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            about: props.user.profile.about
+            about: props.user.profile.about,
+            profession: props.user.profile.profession
         };
+    }
+
+    isAuthenticated() {
+        return this.props.user._id === Meteor.user()._id;
     }
 
     getAverage() {
@@ -28,9 +34,9 @@ class Profile extends React.Component {
     }
 
     getAbout() {
-        if(this.props.user._id === Meteor.user()._id) {
+        if(this.isAuthenticated()) {
             return (
-                <Input type="textarea" placeholder="Enter a bit about yourself"
+                <Input label={ 'About ' + this.props.user.username } type="textarea" placeholder="Enter a bit about yourself"
                        value={ this.state.about }
                        ref="about"
                        onChange={ this.handleChange.bind(this) }
@@ -38,21 +44,21 @@ class Profile extends React.Component {
             );
         }
         else {
-            if(this.props.user.profile.about !== null) {
+            if(this.props.user.profile.about.length !== 0) {
                 return (
                     <div className="profile-about">{ this.props.user.profile.about }</div>
                 );
             }
             return (
                 <div>
-                    { this.props.username } hasn't added an about me yet.
+                    { this.props.user.username } hasn't added an about me yet.
                 </div>
             )
         }
     }
 
     getExchanges() {
-        if(this.props.user._id === Meteor.user()._id) {
+        if(this.isAuthenticated()) {
             return (
                 <div>
                     <h2>
@@ -72,6 +78,30 @@ class Profile extends React.Component {
         }
     }
 
+    onProfessionCB(value) {
+        this.setState({
+            profession: value
+        });
+        this.changeProfession();
+    }
+
+    getProfessionUpdate() {
+        if(this.isAuthenticated()) {
+            return (
+                <ServiceList label="Profession" selected={this.state.profession} callback={ this.onProfessionCB.bind(this) } />
+            );
+        }
+        return null;
+    }
+
+    getProfessionDisplay() {
+        return (
+            <div className="profile-profession">
+                { this.props.user.profile.profession }
+            </div>
+        );
+    }
+
     getChangeAvatar() {
         return this.props.user._id === Meteor.user()._id ? <ChangeAvatar /> : null;
     }
@@ -89,14 +119,15 @@ class Profile extends React.Component {
                                     { this.getChangeAvatar() }
                                 </Avatar>
                                 <Stars rating={ this.getAverage() } cls="profile-ratings"/>
+                                { this.getProfessionDisplay() }
                                 <div className="profile-details">
                                     <JoinedStamp joined={ user.profile.createdAt } />
                                     <Verified verified={ user.emails[0].verified } />
                                 </div>
                                 <AlertMessage type='danger' message={ error } />
                                 <AlertMessage type='success' message={ success } timeout={ 5000 } />
-                                <h2>About { user.username }</h2>
                                 { this.getAbout() }
+                                { this.getProfessionUpdate() }
                                 { this.getExchanges() }
                             </Well>
                         </Col>
@@ -114,6 +145,16 @@ class Profile extends React.Component {
 
         if(about.value !== user.profile.about) {
             changeAbout(about.value);
+        }
+    }
+
+    changeProfession() {
+        const { changeProfession } = this.props;
+        const profession = this.state.profession;
+        const user = this.props.user;
+
+        if(profession !== user.profile.profession) {
+            changeProfession(profession);
         }
     }
 

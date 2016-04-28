@@ -3,10 +3,10 @@ import Select from 'react-select';
 
 class ServiceList extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            value: undefined
+            value: props.selected || undefined
         };
     }
 
@@ -40,10 +40,5 @@ class ServiceList extends React.Component {
         )
     }
 }
-
-//<Input ref="offerType" defaultValue="selected" type="select" label={ this.props.label }>
-//    <option value="selected" disabled>Select</option>
-//    { this.buildServices() }
-//</Input>
 
 export default ServiceList;

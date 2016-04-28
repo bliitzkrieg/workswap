@@ -1,6 +1,6 @@
 export default {
 
-    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, referral) {
+    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, referral, profession) {
 
         if (file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
@@ -28,6 +28,10 @@ export default {
             return LocalState.set('CREATE_USER_ERROR', 'Password is required.');
         }
 
+        if (!profession) {
+            return LocalState.set('CREATE_USER_ERROR', 'Profession is required.');
+        }
+
         LocalState.set('CREATE_USER_ERROR', null);
 
         S3.upload({
@@ -46,7 +50,8 @@ export default {
                 password,
                 profile: {
                     referral: referral,
-                    avatar: url
+                    avatar: url,
+                    profession: profession
                 }
             }, function (err) {
                 if (err) {
@@ -143,6 +148,21 @@ export default {
             }
 
             Bert.alert( 'Success, your about has been updated.', 'success', 'growl-top-right' );
+        });
+    },
+
+    changeProfession({ Meteor, LocalState }, profession) {
+        LocalState.set('PROFILE_ERROR', null);
+        LocalState.set('PROFILE_SUCCESS', null);
+
+        const id = Meteor.user()._id;
+        Meteor.call('user.setProfession', profession, id, (err) => {
+            if (err) {
+                Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                return false;
+            }
+
+            Bert.alert( 'Success, your profession has been updated.', 'success', 'growl-top-right' );
         });
     },
 

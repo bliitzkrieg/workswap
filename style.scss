@@ -18,6 +18,14 @@ main {
     margin-top: 20px !important;
 }
 
+label {
+    font-weight: normal;
+}
+
+textarea {
+    max-width: 100%;
+}
+
 .navbar-brand {
     display: flex;
     align-items: center;
