@@ -1,12 +1,12 @@
 export default {
 
-    create({ Meteor, LocalState, FlowRouter }, username, email, password, file, referral, profession) {
+    create({ LocalState, FlowRouter }, fname, lname, email, password, file, referral, profession) {
 
         if (file.length === 0) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo is required.');
         }
 
-        const five_mb = 1024 * 1024 * 5;
+        const five_mb = 1024 * 1024 * 5; //Abstract out
         if (file[0].size > five_mb) {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo file size must be less than 5MB');
         }
@@ -16,8 +16,12 @@ export default {
             return LocalState.set('CREATE_USER_ERROR', 'Profile Photo must be PNG or JPG.');
         }
 
-        if (!username) {
-            return LocalState.set('CREATE_USER_ERROR', 'Username is required.');
+        if (!fname) {
+            return LocalState.set('CREATE_USER_ERROR', 'First Name is required.');
+        }
+
+        if(!lname) {
+            return LocalState.set('CREATE_USER_ERROR', 'Last Name is required.');
         }
 
         if (!email) {
@@ -45,10 +49,11 @@ export default {
 
             const url = response.url;
             Accounts.createUser({
-                username,
                 email,
                 password,
                 profile: {
+                    fname: fname,
+                    lname: lname,
                     referral: referral,
                     avatar: url,
                     profession: profession
@@ -95,7 +100,7 @@ export default {
         });
     },
 
-    changePhoto({ Meteor, LocalState }, file) {
+    changePhoto({ Meteor }, file) {
         if (file.length === 0) {
             Bert.alert( 'Hey!, the Profile Photo is required.', 'danger', 'growl-top-right' );
             return null;

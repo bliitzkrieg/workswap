@@ -9,17 +9,30 @@ export default function () {
             Meteor.call('invitation.fulfill', profile.referral, (err) => {});
         }
 
-        Meteor.call('rating.create', user._id, (err) => {});
-
         profile.createdAt = new Date();
         profile.about = null;
         profile.admin = false;
 
+        user.username = Meteor.call('user.generateUsername', options.profile);
         user.profile = profile;
         return user;
     });
 
     Meteor.methods({
+        'user.generateUsername'(profile) {
+            const { fname, lname } = profile;
+            let username = `${fname}${lname}`;
+            let user = Meteor.users.findOne({ username });
+            let number = 0;
+
+            while(user) {
+                number++;
+                username = `${fname}${lname}${number}`;
+                user = Meteor.users.findOne({ username });
+            }
+
+            return username;
+        },
 
         'user.setAbout'(about, id) {
             check(about, String);
@@ -37,7 +50,7 @@ export default function () {
         },
 
         'user.setProfession'(profession, id) {
-            check(profession, String);
+            check(profession, Object);
 
             const user = Meteor.user();
 

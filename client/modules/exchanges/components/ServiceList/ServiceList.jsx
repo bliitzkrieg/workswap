@@ -20,13 +20,17 @@ class ServiceList extends React.Component {
     }
 
     doChange(value) {
-        this.props.callback(value);
+        const profession = this.props.services.filter(function(item) {
+            return item._id === value;
+        })[0];
+        this.props.callback(profession);
         this.setState({
             value
         });
     }
 
     render() {
+        const clearable = this.props.clearable ? false : this.props.clearable;
         return (
             <div className="form-group">
                 <label className="control-label">{ this.props.label }</label>
@@ -35,6 +39,7 @@ class ServiceList extends React.Component {
                     options={ this.buildServices() }
                     value={ this.state.value }
                     onChange={ this.doChange.bind(this) }
+                    clearable={ clearable }
                 />
             </div>
         )

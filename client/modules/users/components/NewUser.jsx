@@ -1,19 +1,7 @@
 import React from 'react';
 import { Input, ButtonInput } from 'react-bootstrap';
-import ServiceList from '../../exchanges/containers/ServiceList.js';
 
 class NewUser extends React.Component {
-
-    constructor() {
-        super();
-        this.state = { };
-    }
-
-    onProfessionCB(value) {
-        this.setState({
-            profession: value
-        });
-    }
 
     render() {
         const {error} = this.props;
@@ -22,10 +10,11 @@ class NewUser extends React.Component {
                 <h1>Sign Up</h1>
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
                 <form>
-                    <Input ref="username" type="text" label="Username" placeholder="Username" />
+                    <Input ref="fname" type="text" label="First Name" placeholder="First Name" />
+                    <Input ref="lname" type="text" label="Last Name" placeholder="Last Name" />
                     <Input ref="email" type="email" label="Email" placeholder="Email" />
                     <Input ref="password" type="password" label="Password" placeholder="Password" />
-                    <ServiceList label="What do you offer?" callback={ this.onProfessionCB.bind(this) } />
+                    <Input ref="profession" type="text" label="What do you classify yourself as?" placeholder="Accountant" />
                     <Input ref="profile_photo" type="file" label="Profile Photo" help="Upload a profile Picture" />
                     <ButtonInput onClick={this.createUser.bind(this)}
                                  value="Sign Up"
@@ -38,14 +27,15 @@ class NewUser extends React.Component {
     createUser(e) {
         e.preventDefault();
         const { create } = this.props;
-        const username = this.refs.username.refs.input;
+        const fname = this.refs.fname.refs.input;
+        const lname = this.refs.lname.refs.input;
         const email = this.refs.email.refs.input;
         const password = this.refs.password.refs.input;
         const referral = this.props.invite;
         const file = this.refs.profile_photo.refs.input.files;
-        const profession = this.state.profession;
+        const profession = this.refs.profession.refs.input;
 
-        create(username.value, email.value, password.value, file, referral, profession);
+        create(fname.value, lname.value, email.value, password.value, file, referral, profession.value);
     }
 }
 

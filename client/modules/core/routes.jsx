@@ -33,7 +33,7 @@ export default function (injectDeps, {FlowRouter}) {
     publicRoutes.route('/', {
         name: 'home',
         action() {
-            mount(MainLayoutCtx, {
+            mount(FullLayoutCtx, {
                 content: (<Auth user={ Meteor.user() } />)
             });
         }

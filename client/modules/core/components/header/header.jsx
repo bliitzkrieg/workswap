@@ -1,11 +1,14 @@
 import React from 'react';
 import { Navbar } from 'react-bootstrap';
-import UserControls from '../NavUserControls/NavUserControls.jsx';
-import HeaderSearch from '../HeaderSearch/HeaderSearch.jsx';
+import NavUserControls from '../NavUserControls/NavUserControls.jsx';
 
 class Header extends React.Component {
 
     render() {
+        const user = this.props.user;
+        const email = user ? user.emails[0].address : null;
+        const avatar = user ? user.profile.avatar : null;
+
         return (
             <Navbar>
                 <Navbar.Header>
@@ -15,8 +18,7 @@ class Header extends React.Component {
                         </a>
                     </Navbar.Brand>
                 </Navbar.Header>
-                <HeaderSearch />
-                <UserControls username={ this.props.username } avatar={ this.props.avatar } />
+                <NavUserControls display={ email } avatar={ avatar } />
             </Navbar>
         );
     }

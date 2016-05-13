@@ -2,7 +2,7 @@ import Profile from '../components/Profile/Profile.jsx';
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({ context, clearErrors }, onData) => {
-    const { LocalState, Collections } = context();
+    const { LocalState } = context();
     const error = LocalState.get('PROFILE_ERROR');
     const success = LocalState.get('PROFILE_SUCCESS');
     const user_username = FlowRouter.getParam("user");
@@ -20,12 +20,7 @@ export const composer = ({ context, clearErrors }, onData) => {
             FlowRouter.go('/404');
         }
 
-        if (Meteor.subscribe('ratings.list', user._id).ready()) {
-            const ratings = Collections.Ratings.find({ user: user._id }).fetch();
-            onData(null, { user, ratings, error, success });
-        } else {
-            onData();
-        }
+        onData(null, { user, error, success });
 
     } else {
         onData();

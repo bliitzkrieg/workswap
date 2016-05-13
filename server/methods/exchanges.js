@@ -7,8 +7,8 @@ export default function () {
     Meteor.methods({
         'exchanges.create'(_id, requestType, offerType, title, details) {
             check(_id, String);
-            check(requestType, String);
-            check(offerType, String);
+            check(requestType, Object);
+            check(offerType, Object);
             check(title, String);
             check(details, String);
 
