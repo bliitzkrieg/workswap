@@ -1,5 +1,6 @@
 import React from 'react';
-import { Input, ButtonInput } from 'react-bootstrap';
+import ReactDOM from 'react-dom';
+import { FormControl, Button, FormGroup, ControlLabel } from 'react-bootstrap';
 
 class NewUser extends React.Component {
 
@@ -10,15 +11,33 @@ class NewUser extends React.Component {
                 <h1>Sign Up</h1>
                 {error ? <p style={{color: 'red'}}>{error}</p> : null}
                 <form>
-                    <Input ref="fname" type="text" label="First Name" placeholder="First Name" />
-                    <Input ref="lname" type="text" label="Last Name" placeholder="Last Name" />
-                    <Input ref="email" type="email" label="Email" placeholder="Email" />
-                    <Input ref="password" type="password" label="Password" placeholder="Password" />
-                    <Input ref="profession" type="text" label="What do you classify yourself as?" placeholder="Accountant" />
-                    <Input ref="profile_photo" type="file" label="Profile Photo" help="Upload a profile Picture" />
-                    <ButtonInput onClick={this.createUser.bind(this)}
-                                 value="Sign Up"
-                                 type="submit" />
+                    <FormGroup>
+                        <ControlLabel>First Name</ControlLabel>
+                        <FormControl ref="fname" type="text" placeholder="First Name" />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Last Name</ControlLabel>
+                        <FormControl ref="lname" type="text" placeholder="Last Name" />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Email</ControlLabel>
+                        <FormControl ref="email" type="email" placeholder="Email" />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Password</ControlLabel>
+                        <FormControl ref="password" type="password" placeholder="Password" />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>What do you classify yourself as?</ControlLabel>
+                        <FormControl ref="profession" type="text" placeholder="Accountant" />
+                    </FormGroup>
+                    <FormGroup>
+                        <ControlLabel>Profile Photo</ControlLabel>
+                        <input type="file" ref="profile_photo" />
+                    </FormGroup>
+                    <Button onClick={this.createUser.bind(this)} type="submit">
+                        Sign Up
+                    </Button>
                 </form>
             </div>
         )
@@ -27,13 +46,13 @@ class NewUser extends React.Component {
     createUser(e) {
         e.preventDefault();
         const { create } = this.props;
-        const fname = this.refs.fname.refs.input;
-        const lname = this.refs.lname.refs.input;
-        const email = this.refs.email.refs.input;
-        const password = this.refs.password.refs.input;
+        const fname = ReactDOM.findDOMNode(this.refs.fname);
+        const lname = ReactDOM.findDOMNode(this.refs.lname);
+        const email = ReactDOM.findDOMNode(this.refs.email);
+        const password = ReactDOM.findDOMNode(this.refs.password);
         const referral = this.props.invite;
-        const file = this.refs.profile_photo.refs.input.files;
-        const profession = this.refs.profession.refs.input;
+        const file = this.refs.profile_photo.files;
+        const profession = ReactDOM.findDOMNode(this.refs.profession);
 
         create(fname.value, lname.value, email.value, password.value, file, referral, profession.value);
     }

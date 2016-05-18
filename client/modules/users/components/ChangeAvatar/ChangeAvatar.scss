@@ -1,14 +1,15 @@
-@import "{}/variables.scss";
-@import "{}/mixins.scss";
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
 
 .change-avatar {
   height: 100%;
   width: 100%;
   cursor: pointer;
+  transition: all 0.2s linear;
   &:hover {
     background: rgba(26, 26, 26, 0.7);
     .change-avatar-input-container {
-      display: flex;
+      opacity: 1;
     }
     .change-avatar-icon {
       opacity: 0;
@@ -18,10 +19,11 @@
 
 .change-avatar-input-container {
   @include flex(center, center);
+  opacity: 0;
   height: 100%;
   width: 100%;
-  display: none;
   color: $workswap-white;
+  text-align: center;
 }
 
 .change-avatar-input {
@@ -35,7 +37,7 @@
   opacity: 1;
   position: absolute;
   bottom: 5px;
-  left: 5px;
+  left: calc(50% - 15px);
   color: $workswap-white;
   font-size: 24px;
   display: flex;

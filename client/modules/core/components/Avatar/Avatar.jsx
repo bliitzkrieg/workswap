@@ -5,8 +5,8 @@ class Avatar extends React.Component {
     render() {
         const bg_styles = {
             background: 'url(' + this.props.src + ') no-repeat center center',
-            height: this.props.height || '120',
-            width: this.props.width || '120'
+            height: this.props.height + 'px' || '120',
+            width: this.props.width + 'px' || '120'
         };
 
         const cls = this.props.cls ? 'avatar' + ' ' + this.props.cls : 'avatar';

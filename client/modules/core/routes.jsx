@@ -1,10 +1,12 @@
 import React from 'react';
 import { mount } from 'react-mounter';
+import { Accounts } from 'meteor/accounts-base'
 
 import Layout from './components/MainLayout/MainLayout.jsx';
 import FullLayout from './components/FullLayout/FullLayout.jsx';
 import Auth from '../core/components/Auth/Auth.jsx';
 import Login from '../users/containers/Login';
+import ResetPassword from '../users/containers/ResetPassword';
 import NewUser from '../users/containers/NewUser';
 import CreateExchange from '../exchanges/containers/CreateExchange';
 import ListExchange from '../exchanges/containers/ListExchanges';
@@ -12,12 +14,55 @@ import UserExchanges from '../exchanges/containers/UserExchanges';
 import FAQ from '../core/components/FAQ/FAQ.jsx';
 import Contact from '../core/components/Contact/Contact.jsx';
 import PublicProfile from '../users/containers/PublicProfile';
+import EditProfile from '../users/containers/EditProfile';
 import PageNotFound from '../core/components/PageNotFound/PageNotFound.jsx';
 import AdminDashboard from '../admin/containers/AdminDashboard';
 
 export default function (injectDeps, {FlowRouter}) {
     const MainLayoutCtx = injectDeps(Layout);
     const FullLayoutCtx = injectDeps(FullLayout);
+
+    // ********************
+    // Unauthorized Routes
+    // These routes are route we don't want the users to be able to access once they are logged in.
+    // ********************
+
+    const unauthorizedRoutes = FlowRouter.group( {
+        name: 'unauthorized',
+        triggersEnter: [function(context, redirect) {
+            if(Meteor.user()) {
+                redirect('/');
+            }
+            GAnalytics.pageview(context.path);
+        }]
+    } );
+
+    unauthorizedRoutes.route('/login', {
+        name: 'users.login',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<Login />)
+            });
+        }
+    });
+
+    unauthorizedRoutes.route('/login/:redirect', {
+        name: 'users.login.redirect',
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<Login redirectTo={ FlowRouter.getParam("redirect") } />)
+            });
+        }
+    });
+
+    unauthorizedRoutes.route( '/register', {
+        name: 'users.register',
+        action() {
+            mount(MainLayoutCtx, {
+                content: (<NewUser />)
+            });
+        }
+    });
 
     // ********************
     // Public Routes
@@ -30,6 +75,22 @@ export default function (injectDeps, {FlowRouter}) {
         }]
     } );
 
+    publicRoutes.route( '/verify-email/:token', {
+        name: 'verify-email',
+        action(params) {
+            Accounts.verifyEmail( params.token, ( err ) => {
+                if(err) {
+                    Bert.alert(err.reason + '.', 'danger', 'growl-top-right');
+                    FlowRouter.go('/404');
+                }
+                else {
+                    Bert.alert( 'You rock! Email verified!', 'success', 'growl-top-right' );
+                    FlowRouter.go('/');
+                }
+            });
+        }
+    });
+
     publicRoutes.route('/', {
         name: 'home',
         action() {
@@ -39,11 +100,11 @@ export default function (injectDeps, {FlowRouter}) {
         }
     });
 
-    publicRoutes.route('/login', {
-        name: 'users.login',
+    publicRoutes.route('/reset', {
+        name: 'users.reset',
         action() {
-            mount(MainLayoutCtx, {
-                content: (<Login />)
+            mount(FullLayoutCtx, {
+                content: (<ResetPassword />)
             });
         }
     });
@@ -51,7 +112,7 @@ export default function (injectDeps, {FlowRouter}) {
     publicRoutes.route('/user/:user', {
        name: 'users.profile',
         action() {
-            mount(FullLayoutCtx, {
+            mount(MainLayoutCtx, {
                 content: (<PublicProfile />)
             });
         }
@@ -71,24 +132,6 @@ export default function (injectDeps, {FlowRouter}) {
         action() {
             mount(MainLayoutCtx, {
                 content: (<Contact />)
-            });
-        }
-    });
-
-    publicRoutes.route('/login/:redirect', {
-        name: 'users.login.redirect',
-        action() {
-            mount(MainLayoutCtx, {
-                content: (<Login redirectTo={ FlowRouter.getParam("redirect") } />)
-            });
-        }
-    });
-
-    publicRoutes.route( '/register', {
-        name: 'users.register',
-        action() {
-            mount(MainLayoutCtx, {
-                content: (<NewUser />)
             });
         }
     });
@@ -126,7 +169,7 @@ export default function (injectDeps, {FlowRouter}) {
         name: 'user.profile',
         action() {
             mount(FullLayoutCtx, {
-                content: (<PublicProfile />)
+                content: (<EditProfile />)
             });
         }
     });
@@ -187,10 +230,20 @@ export default function (injectDeps, {FlowRouter}) {
     // 404
     // ********************
 
-    // 404
+
+    publicRoutes.route('/404',
+        {
+        name: '404',
+        action() {
+            mount(FullLayoutCtx, {
+                content: (<PageNotFound />)
+            });
+        }
+    });
+
     FlowRouter.notFound = {
         action() {
-            mount(MainLayoutCtx, {
+            mount(FullLayoutCtx, {
                 content: (<PageNotFound />)
             });
         }

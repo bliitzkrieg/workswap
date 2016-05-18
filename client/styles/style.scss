@@ -1,22 +1,31 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,600,700);
 @import url(https://fonts.googleapis.com/css?family=Chewy);
 
-@import "{}/variables.scss";
+@import "{}/client/styles/variables.scss";
 
 body {
-    background: #fffefb;
+    background: #ebeff2;
     color: $workswap-black;
     font-family: 'Raleway', sans-serif;
     font-weight: 100;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-weight: 100;
 }
 
-main {
-    margin-top: 20px !important;
+a {
+    color: $main !important;
+    &:hover {
+        color: darken($main, 20%) !important;
+        text-decoration: none;
+    }
 }
+
 
 label {
     font-weight: normal;
@@ -43,3 +52,14 @@ textarea {
     position: relative;
     z-index: 1;
 }
+
+.subtitle__small {
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 12px;
+    padding-bottom: 5px;
+}
+
+//.container-fluid {
+//    padding: 0;
+//}

@@ -1,0 +1,22 @@
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
+
+.sidebar__footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 10px;
+  @include flex(center, center, column);
+  p {
+    margin: 0;
+  }
+}
+
+.sidebar__footer__links {
+  margin: 0;
+  padding: 0;
+  li {
+    display: inline;
+    margin: 0 10px;
+  }
+}

@@ -1,0 +1,30 @@
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
+
+.sidebar__menu {
+  margin-top: 40px;
+  width: 100%;
+}
+
+.sidebar__menu__item {
+  height: 50px;
+  padding-left: 30px;
+  @include flex(flex-start, center);
+  &.-active {
+    border-left: 3px solid $main;
+  }
+}
+
+.sidebar__menu__item_link {
+  color: $main;
+  width: 100%;
+  @include flex(flex-start, center);
+}
+
+.sidebar__menu__item__label {
+  margin-left: 20px;
+}
+
+.sidebar__menu__item__icon {
+  margin-right: 30px;
+}

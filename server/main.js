@@ -1,16 +1,21 @@
 import publications from './publications';
 import methods from './methods';
 import seeder from './seeder';
+import configs from './config';
 
 const inDevelopment = function () {
     return process.env.NODE_ENV === "development";
 };
+
 const inProduction = function () {
     return process.env.NODE_ENV === "production";
 };
 
+FlowRouter.setDeferScriptLoading(true);
+
 publications();
 methods();
+configs();
 
 if(inDevelopment()) {
     seeder();

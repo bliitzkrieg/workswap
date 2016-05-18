@@ -1,4 +1,4 @@
-@import "{}/variables.scss";
+@import "{}/client/styles/variables.scss";
 
 .faq-cta {
   position: relative;
@@ -26,8 +26,8 @@
 }
 
 .faq-link {
-  color: $workswap-main;
+  color: $main;
   &:hover {
-    color: lighten($workswap-main, 10%);
+    color: lighten($main, 10%);
   }
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from '../Header/Header.jsx';
-import Footer from '../Footer/Footer.jsx';
 
 class MainLayout extends React.Component {
 
@@ -18,7 +17,6 @@ class MainLayout extends React.Component {
                 <main className={ this.isHome() }>
                     { this.props.content }
                 </main>
-                <Footer />
             </div>
         );
     }

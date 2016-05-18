@@ -1,0 +1,40 @@
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
+
+.profile__link {
+  margin-top: 20px;
+  width: calc(100% - 40px);
+  input {
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
+
+.profile__link__actions {
+  width: 100%;
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  @include flex(space-around, center);
+}
+
+.profile__link__actions {
+  text-align: center;
+  height: 36px;
+  color: $main;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.profile__link__action {
+  &:hover {
+    color: darken($main, 20%);
+  }
+}

@@ -1,3 +1,5 @@
+import { Accounts } from 'meteor/accounts-base'
+
 export default {
 
     create({ LocalState, FlowRouter }, fname, lname, email, password, file, referral, profession) {
@@ -59,6 +61,7 @@ export default {
                     profession: profession
                 }
             }, function (err) {
+                console.log(err);
                 if (err) {
                     Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
                     return false;
@@ -97,6 +100,23 @@ export default {
             else {
                 FlowRouter.go('/');
             }
+        });
+    },
+
+    reset({ LocalState }, email) {
+        if (!email) {
+            return LocalState.set('RESET_ERROR', 'Email is required.');
+        }
+
+        LocalState.set('RESET_ERROR', null);
+        LocalState.set('RESET_SUCCESS', false);
+
+        Accounts.forgotPassword({ email: email }, function(err) {
+            if(err) {
+                return  LocalState.set('RESET_ERROR', err.reason);
+            }
+
+            return LocalState.set('RESET_SUCCESS', true);
         });
     },
 
@@ -140,6 +160,21 @@ export default {
         });
     },
 
+    changeEmployment({ Meteor, LocalState }, status) {
+        LocalState.set('EMPLOYMENT_SET_ERROR', null);
+        LocalState.set('EMPLOYMENT_SET_SUCCESS', null);
+
+        const id = Meteor.user()._id;
+        Meteor.call('user.setEmployment', status, id, (err) => {
+            if (err) {
+                Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                return false;
+            }
+
+            Bert.alert( 'Success! Your employment status has been updated.', 'success', 'growl-top-right' );
+        });
+    },
+
     changeAbout({ Meteor, LocalState }, about) {
 
         LocalState.set('PROFILE_ERROR', null);
@@ -156,21 +191,6 @@ export default {
         });
     },
 
-    changeProfession({ Meteor, LocalState }, profession) {
-        LocalState.set('PROFILE_ERROR', null);
-        LocalState.set('PROFILE_SUCCESS', null);
-
-        const id = Meteor.user()._id;
-        Meteor.call('user.setProfession', profession, id, (err) => {
-            if (err) {
-                Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
-                return false;
-            }
-
-            Bert.alert( 'Success, your profession has been updated.', 'success', 'growl-top-right' );
-        });
-    },
-
     clearErrors({LocalState}) {
         return LocalState.set('LOGIN_ERROR', null);
     },
@@ -181,5 +201,13 @@ export default {
 
     clearProfileErrors({LocalState}) {
         return LocalState.set('PROFILE_ERROR', null);
+    },
+
+    clearResetErrors({LocalState}) {
+        return LocalState.set('RESET_ERROR', null);
+    },
+
+    clearResetSuccess({LocalState}) {
+        return LocalState.set('RESET_SUCCESS', false);
     }
 };

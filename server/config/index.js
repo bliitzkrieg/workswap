@@ -1,3 +1,5 @@
-export default function () {
+import emails from './emails';
 
+export default function () {
+    emails();
 }

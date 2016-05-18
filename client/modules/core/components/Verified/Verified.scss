@@ -1,9 +1,9 @@
-@import "{}/variables.scss";
+@import "{}/client/styles/variables.scss";
 
 .verified-container {
   text-align: right;
 }
 
 .verified-icon {
-  color: $workswap-main;
+  color: $main;
 }

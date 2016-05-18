@@ -1,5 +1,11 @@
-@import "{}/variables.scss";
+@import "{}/client/styles/variables.scss";
 
 .sidebar__enabled {
   margin-left: $sidebar-width;
+}
+
+.top__line {
+  width: 100%;
+  height: 3px;
+  background: $main;
 }
