@@ -27,8 +27,7 @@ class ResetPassword extends React.Component {
             return (
                 <div className="reset__success">
                     <i className="fa fa-check reset__success__icon" aria-hidden="true"></i>
-                    <div className="reset__success__message">Done!<br/> Check your email for the reset link.</div>
-                    <a className="reset__success__back" href="/login">Back to Login</a>
+                    <div className="reset__success__message">Done!<br/> Please check your email</div>
                 </div>
             )
         }
@@ -59,6 +58,9 @@ class ResetPassword extends React.Component {
                             { this.isSent() }
                         </Col>
                     </Row>
+                    <div className="login__signup_cta">
+                        Back to <a href="/login">Login</a>
+                    </div>
                 </div>
             </div>
         )
