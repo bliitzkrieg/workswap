@@ -4,10 +4,13 @@ import { FormControl, Button, FormGroup, ControlLabel, Row, Col, Alert } from 'r
 
 class ResetPassword extends React.Component {
 
+    componentWillMount() {
+        Meteor.logout();
+    }
+
     componentWillUnmount() {
-        const { clearErrors, clearSuccess } = this.props;
+        const { clearErrors } = this.props;
         clearErrors();
-        clearSuccess();
     }
 
     buildErrors(error) {
@@ -21,27 +24,22 @@ class ResetPassword extends React.Component {
         return null;
     }
 
-    isSent() {
-        const { error, success } = this.props;
-        if(success) {
-            return (
-                <div className="reset__success">
-                    <i className="fa fa-check reset__success__icon" aria-hidden="true"></i>
-                    <div className="reset__success__message">Done!<br/> Check your email for the reset link.</div>
-                    <a className="reset__success__back" href="/login">Back to Login</a>
-                </div>
-            )
-        }
+    buildForm() {
+        const { error } = this.props;
         return (
             <div>
                 <div className="login__form__title">Reset your password</div>
                 { this.buildErrors(error) }
                 <form className="login__form" onSubmit={ this.reset.bind(this) }>
                     <FormGroup>
-                        <ControlLabel>Email</ControlLabel>
-                        <FormControl ref="email" type="text" placeholder="Email" />
+                        <ControlLabel>Password</ControlLabel>
+                        <FormControl ref="password" type="password" placeholder="Password" />
                     </FormGroup>
-                    <Button type="submit" className="login__form__button" bsSize="large" block onClick={ this.reset.bind(this) } >Send reset password email</Button>
+                    <FormGroup>
+                        <ControlLabel>Confirm Password</ControlLabel>
+                        <FormControl ref="repassword" type="password" placeholder="Password" />
+                    </FormGroup>
+                    <Button type="submit" className="login__form__button" bsSize="large" block onClick={ this.reset.bind(this) } >Reset Password</Button>
                 </form>
             </div>
         )
@@ -56,7 +54,7 @@ class ResetPassword extends React.Component {
                     </Row>
                     <Row>
                         <Col lgOffset={4} lg={4} sm={12} className="login__form__container">
-                            { this.isSent() }
+                            { this.buildForm() }
                         </Col>
                     </Row>
                 </div>
@@ -66,13 +64,14 @@ class ResetPassword extends React.Component {
 
     reset(e) {
         e.preventDefault();
-        const { reset, clearErrors, clearSuccess } = this.props;
+        const { doReset, clearErrors, token } = this.props;
         clearErrors();
-        clearSuccess();
-        const email = ReactDOM.findDOMNode(this.refs.email);
 
-        reset(email.value);
-        email.value = '';
+        const password = ReactDOM.findDOMNode(this.refs.password);
+        const repassword = ReactDOM.findDOMNode(this.refs.repassword);
+
+        doReset(password.value, repassword.value, token);
+        password.value = repassword.value = '';
     }
 
 }

@@ -14,20 +14,6 @@ const context = initContext();
 
 bertConfig();
 
-//Accounts.onEmailVerificationLink(function(token, done) {
-//
-//    done();
-//    Accounts.verifyEmail(token, function(err) {
-//        if(err) {
-//            Bert.alert(err.reason + '.', 'danger', 'growl-top-right');
-//            FlowRouter.go('/404');
-//        }
-//        else {
-//            Bert.alert( 'You rock! Email verified!', 'success', 'growl-top-right' );
-//        }
-//    });
-//});
-
 // create app
 const app = createApp(context);
 app.loadModule(coreModule);

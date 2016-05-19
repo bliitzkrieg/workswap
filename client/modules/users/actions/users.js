@@ -120,6 +120,30 @@ export default {
         });
     },
 
+    doReset({ LocalState, FlowRouter }, password, repassword, token) {
+        if (!password) {
+            return LocalState.set('RESET_ERROR', 'Password is required.');
+        }
+
+        if(!repassword) {
+            return LocalState.set('RESET_ERROR', 'Password confirmation is required.');
+        }
+
+        if(password != repassword) {
+            return LocalState.set('RESET_ERROR', 'Passwords must match.');
+        }
+
+        Accounts.resetPassword(token, password, function(err) {
+            if(err) {
+                Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
+                return false;
+            }
+
+            Bert.alert( 'Success, your password has been changed.', 'success', 'growl-top-right' );
+            FlowRouter.go('/login');
+        })
+    },
+
     changePhoto({ Meteor }, file) {
         if (file.length === 0) {
             Bert.alert( 'Hey!, the Profile Photo is required.', 'danger', 'growl-top-right' );

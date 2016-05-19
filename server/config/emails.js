@@ -23,4 +23,17 @@ export default function () {
         }
     };
 
+    Accounts.emailTemplates.resetPassword = {
+        subject() {
+            return "[Resume.io] Reset your password";
+        },
+        text( user, url ) {
+            let urlWithoutHash = url.replace( '#/', '' ),
+                supportEmail   = "support@resume.io",
+                emailBody      = `To reset your password visit the following link:\n\n${urlWithoutHash}\n\n If you did not request this reset, please ignore this email. If you feel something is wrong, please contact our support team: ${supportEmail}.`;
+
+            return emailBody;
+        }
+    };
+
 }

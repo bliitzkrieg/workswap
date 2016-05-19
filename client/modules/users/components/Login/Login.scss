@@ -43,10 +43,11 @@
   background: $main;
   border-color: $main;
   &:hover,
+  &:active,
   &:focus {
-    color: white;
-    background: darken($main, 10%);
-    border-color: darken($main, 10%);
+    color: white !important;
+    background: darken($main, 10%) !important;
+    border-color: darken($main, 10%) !important;
   }
 }
 

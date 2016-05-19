@@ -7,6 +7,7 @@ import FullLayout from './components/FullLayout/FullLayout.jsx';
 import Auth from '../core/components/Auth/Auth.jsx';
 import Login from '../users/containers/Login';
 import ResetPassword from '../users/containers/ResetPassword';
+import ResetPasswordForm from '../users/containers/ResetPasswordForm';
 import NewUser from '../users/containers/NewUser';
 import CreateExchange from '../exchanges/containers/CreateExchange';
 import ListExchange from '../exchanges/containers/ListExchanges';
@@ -49,7 +50,7 @@ export default function (injectDeps, {FlowRouter}) {
     unauthorizedRoutes.route('/login/:redirect', {
         name: 'users.login.redirect',
         action() {
-            mount(MainLayoutCtx, {
+            mount(FullLayoutCtx, {
                 content: (<Login redirectTo={ FlowRouter.getParam("redirect") } />)
             });
         }
@@ -58,7 +59,7 @@ export default function (injectDeps, {FlowRouter}) {
     unauthorizedRoutes.route( '/register', {
         name: 'users.register',
         action() {
-            mount(MainLayoutCtx, {
+            mount(FullLayoutCtx, {
                 content: (<NewUser />)
             });
         }
@@ -87,6 +88,15 @@ export default function (injectDeps, {FlowRouter}) {
                     Bert.alert( 'You rock! Email verified!', 'success', 'growl-top-right' );
                     FlowRouter.go('/');
                 }
+            });
+        }
+    });
+
+    publicRoutes.route( '/reset-password/:token', {
+        name: 'reset-password',
+        action(params) {
+            mount(FullLayoutCtx, {
+                content: (<ResetPasswordForm token={ params.token } />)
             });
         }
     });
