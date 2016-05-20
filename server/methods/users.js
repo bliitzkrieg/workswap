@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Accounts } from 'meteor/accounts-base'
+import ActivityTypes from '../../lib/activities';
 
 export default function () {
 
@@ -84,6 +85,8 @@ export default function () {
             Meteor.users.upsert({ _id: user._id }, {
                 $push: { 'profile.views': record }
             });
+
+            Meteor.call('activities.create', ActivityTypes.PROFILE_VIEW, user._id, current);
         },
 
         'user.setEmployment'(status, id) {

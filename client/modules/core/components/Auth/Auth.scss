@@ -1,7 +1,19 @@
 @import "{}/client/styles/variables.scss";
 
+.main__content {
+  transition: all 0.3s ease-in-out;
+}
+
 .sidebar__enabled {
   margin-left: $sidebar-width;
+}
+
+.notification__center__enabled {
+  margin-right: $notification-center-width;
+}
+
+.notification__center__disabled {
+  margin-right: 40px;
 }
 
 .top__line {
