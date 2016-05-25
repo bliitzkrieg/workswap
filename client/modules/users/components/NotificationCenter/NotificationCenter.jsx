@@ -1,5 +1,7 @@
 import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
+import Activities from '../../../../../lib/activities';
+import NotificationProfileView from './Notifications/NotificationProfileView/NotificationProfileView.jsx';
 
 class NotificationCenter extends React.Component {
 
@@ -11,7 +13,7 @@ class NotificationCenter extends React.Component {
     }
 
     buildNotifications() {
-        console.log(this.props.activities);
+
         if(this.props.activities.length === 0) {
             return (
                 <div className="notification__center__notification">
@@ -20,16 +22,14 @@ class NotificationCenter extends React.Component {
             );
         }
 
-        const items = this.props.activities.map(function(item, index) {
+        return this.props.activities.map(function(item) {
 
-            return (
-                <div key={ item._id } className="notification__center__notification">
-                    Item {index + 1} - { moment(item.createdAt).fromNow() }
-                </div>
-            );
+            switch (item.type) {
+                case Activities.PROFILE_VIEW:
+                    return (<NotificationProfileView key={ item._id } notification={ item } />);
+                    break;
+            }
         });
-
-        return items
     }
 
     toggleNotificationCenter() {

@@ -67,7 +67,7 @@ class ProfileLink extends React.Component {
         const url = `${ constants.url }/user/${ this.props.user.username }`;
         return (
             <div className="profile__link">
-                <div className="subtitle__small">Your Link:</div>
+                <div className="subtitle__small">Share this:</div>
                 <input type="text" ref="url" onClick={ this.doSelect.bind(this) } value={ url } readOnly />
                 <div className="profile__link__actions">
                     <div className="profile__link__action">
