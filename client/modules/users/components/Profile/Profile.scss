@@ -44,10 +44,12 @@
 
 .profile-profession {
   position: absolute;
-  top: 83px;
-  left: 0;
+  top: 25px;
+  left: 10px;
+  font-size: 26px;
   text-align: center;
   width: 182px;
+  text-transform: uppercase;
 }
 
 @include mobile {

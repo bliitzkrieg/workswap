@@ -24,7 +24,7 @@ class NotificationCenter extends React.Component {
         }
 
         return this.props.activities.map(function(item) {
-            
+
             switch (item.type) {
                 case Activities.PROFILE_VIEW:
                     return (<NotificationProfileView key={ item._id } notification={ item } />);
