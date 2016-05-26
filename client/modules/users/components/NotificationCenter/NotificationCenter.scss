@@ -20,7 +20,7 @@
   transform: translateX(210px);
 
   .notification__center__notifications {
-    opacity: 0;
+    transform: translateX(50px);
   }
 
   .notification__close {
@@ -40,7 +40,7 @@
   flex: 1;
   width: 100%;
   text-align: center;
-  transition: opacity 0.5s linear;
+  transition: transform 0.2s ease-in;
 }
 
 .notification__center__notification {

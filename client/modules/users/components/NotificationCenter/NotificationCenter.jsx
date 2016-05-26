@@ -2,6 +2,7 @@ import React from 'react';
 import { Glyphicon } from 'react-bootstrap';
 import Activities from '../../../../../lib/activities';
 import NotificationProfileView from './Notifications/NotificationProfileView/NotificationProfileView.jsx';
+import NotificationEmploymentChange from './Notifications/NotificationEmploymentChange/NotificationEmploymentChange.jsx';
 
 class NotificationCenter extends React.Component {
 
@@ -23,10 +24,13 @@ class NotificationCenter extends React.Component {
         }
 
         return this.props.activities.map(function(item) {
-
+            console.log(item);
             switch (item.type) {
                 case Activities.PROFILE_VIEW:
                     return (<NotificationProfileView key={ item._id } notification={ item } />);
+                    break;
+                case Activities.EMPLOYMENT_CHANGE:
+                    return (<NotificationEmploymentChange key={ item._id } notification={ item } />);
                     break;
             }
         });

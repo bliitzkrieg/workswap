@@ -99,6 +99,8 @@ export default function () {
                 Meteor.users.update({ _id: user._id }, {
                     $set: { 'profile.employed': status }
                 });
+
+                Meteor.call('activities.create', ActivityTypes.EMPLOYMENT_CHANGE, user._id, null);
             }
             else {
                 throw new Meteor.Error(403, 'User Not Authenticated');

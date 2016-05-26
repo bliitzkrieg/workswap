@@ -8,7 +8,7 @@ export default function () {
         return Activities.find({
             user: this.userId
         }, {
-            limit: 7,
+            limit: 8,
             sort: { createdAt: -1 }
         });
     });

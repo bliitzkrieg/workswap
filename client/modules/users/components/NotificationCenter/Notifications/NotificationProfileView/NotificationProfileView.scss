@@ -1,3 +1,18 @@
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
+
 .notification__center__notification__profile__view {
-  color: green;
+  margin: 20px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.notification__center__notification__profile__view__avatar {
+  align-self: flex-start;
+  margin-right: 10px;
+}
+
+.notification__center__notification__profile__view__content {
+  flex: 1;
+  text-align: left;
 }

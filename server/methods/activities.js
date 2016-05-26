@@ -10,13 +10,13 @@ export default function () {
             check(user, String);
             check(sender, Match.Optional(Match.OneOf(Object, null)));
 
-            const senderData = {
+            const senderData = sender ? {
                 username: sender.username,
                 fname: sender.profile.fname,
                 lname: sender.profile.lname,
                 avatar: sender.profile.avatar,
                 profession: sender.profile.profession
-            };
+            } : null;
 
             const activity = {
                 type: ActivityTypes[type],
