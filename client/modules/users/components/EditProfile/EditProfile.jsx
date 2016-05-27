@@ -12,45 +12,45 @@ class EditProfile extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            about: props.user.profile.about || ''
+            introduction: props.user.profile.introduction || ''
         };
     }
 
-    getAbout() {
+    getIntroduction() {
         return (
             <FormGroup>
-                <ControlLabel>About { this.props.user.username }</ControlLabel>
-                <FormControl ref="about"
-                             value={ this.state.about }
+                <ControlLabel>Give an introduction</ControlLabel>
+                <FormControl ref="introduction"
+                             value={ this.state.introduction }
                              onChange={ this.handleChange.bind(this) }
-                             onBlur={ this.changeUserAbout.bind(this) }
+                             onBlur={ this.changeUserIntroduction.bind(this) }
                              type="textarea"
-                             placeholder="Enter a bit about yourself" />
+                             placeholder="Keep it clear and simple" />
             </FormGroup>
         );
     }
 
     getProfessionDisplay() {
         return (
-            <div className="profile-profession">
+            <div className="profile__profession">
                 { this.props.user.profile.profession }
             </div>
         );
     }
 
-    changeUserAbout(e) {
+    changeUserIntroduction(e) {
         e.preventDefault();
-        const { changeAbout } = this.props;
-        const about = ReactDOM.findDOMNode(this.refs.about);
+        const { changeIntroduction } = this.props;
+        const introduction = ReactDOM.findDOMNode(this.refs.introduction);
         const user = this.props.user;
 
-        if(about.value !== user.profile.about) {
-            changeAbout(about.value);
+        if(introduction.value !== user.profile.introduction) {
+            changeIntroduction(introduction.value);
         }
     }
 
     handleChange(e) {
-        this.setState({ about: e.target.value });
+        this.setState({ introduction: e.target.value });
     }
 
     render() {
@@ -69,7 +69,7 @@ class EditProfile extends React.Component {
                         </div>
                         <AlertMessage type='danger' message={ error } />
                         <AlertMessage type='success' message={ success } timeout={ 5000 } />
-                        { this.getAbout() }
+                        { this.getIntroduction() }
                     </Well>
                 </Col>
             </Row>

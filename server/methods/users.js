@@ -12,7 +12,7 @@ export default function () {
         }
 
         profile.createdAt = new Date();
-        profile.about = null;
+        profile.introduction = null;
         profile.admin = false;
 
         profile.recommendations = [];
@@ -44,7 +44,7 @@ export default function () {
 
         'user.fetch'(username) {
             const user = Meteor.users.findOne({ username },
-                { fields: {'username': 1, 'profile.avatar': 1, 'profile.about': 1, 'profile.profession': 1, 'profile.fname': 1, 'profile.lname': 1, 'createdAt': 1, 'emails.verified' : 1}});
+                { fields: {'username': 1, 'profile.avatar': 1, 'profile.introduction': 1, 'profile.profession': 1, 'profile.fname': 1, 'profile.lname': 1, 'createdAt': 1, 'emails.verified' : 1}});
 
             if(user) {
                 Meteor.call('user.track', user, Meteor.userId());
@@ -61,7 +61,7 @@ export default function () {
             }
 
             current = Meteor.users.findOne({ _id: current },
-                { fields: {'username': 1, 'profile.avatar': 1, 'profile.about': 1, 'profile.profession': 1, 'profile.fname': 1, 'profile.lname': 1, 'createdAt': 1, 'emails.verified' : 1}});
+                { fields: {'username': 1, 'profile.avatar': 1, 'profile.introduction': 1, 'profile.profession': 1, 'profile.fname': 1, 'profile.lname': 1, 'createdAt': 1, 'emails.verified' : 1}});
 
             // Checks if the authenticated user is not a guest and is not viewing his own profile.
             if(current) {
@@ -107,15 +107,15 @@ export default function () {
             }
         },
 
-        'user.setAbout'(about, id) {
-            check(about, String);
+        'user.setIntroduction'(introduction, id) {
+            check(introduction, String);
             check(id, String);
 
             const user = Meteor.user();
 
             if(user._id === id) {
                 Meteor.users.update({ _id: user._id }, {
-                    $set: { 'profile.about': about }
+                    $set: { 'profile.introduction': introduction }
                 });
             }
             else {

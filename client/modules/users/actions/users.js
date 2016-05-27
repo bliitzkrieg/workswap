@@ -199,19 +199,19 @@ export default {
         });
     },
 
-    changeAbout({ Meteor, LocalState }, about) {
+    changeIntroduction({ Meteor, LocalState }, introduction) {
 
         LocalState.set('PROFILE_ERROR', null);
         LocalState.set('PROFILE_SUCCESS', null);
 
         const id = Meteor.user()._id;
-        Meteor.call('user.setAbout', about, id, (err) => {
+        Meteor.call('user.setIntroduction', introduction, id, (err) => {
             if (err) {
                 Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
                 return false;
             }
 
-            Bert.alert( 'Success, your about has been updated.', 'success', 'growl-top-right' );
+            Bert.alert( 'Success, your introduction has been updated.', 'success', 'growl-top-right' );
         });
     },
 

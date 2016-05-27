@@ -7,23 +7,23 @@ import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx
 
 class Profile extends React.Component {
 
-    getAbout() {
-        const about = this.props.user.profile.about;
-        if(about && about.length !== 0) {
+    getIntroduction() {
+        const introduction = this.props.user.profile.introduction;
+        if(introduction && introduction.length !== 0) {
             return (
-                <div className="profile-about">{ this.props.user.profile.about }</div>
+                <div className="profile-introduction">{ this.props.user.profile.introduction }</div>
             );
         }
         return (
             <div>
-                { this.props.user.username } hasn't added an about me yet.
+                { this.props.user.username } hasn't added an introduction yet.
             </div>
         )
     }
 
     getProfessionDisplay() {
         return (
-            <div className="profile-profession">
+            <div className="profile__profession">
                 { this.props.user.profile.profession }
             </div>
         );
@@ -46,7 +46,7 @@ class Profile extends React.Component {
                                 </div>
                                 <AlertMessage type='danger' message={ error } />
                                 <AlertMessage type='success' message={ success } timeout={ 5000 } />
-                                { this.getAbout() }
+                                { this.getIntroduction() }
                             </div>
                         </Col>
                     </Row>
