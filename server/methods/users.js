@@ -107,31 +107,21 @@ export default function () {
             }
         },
 
-        'user.setIntroduction'(introduction, id) {
-            check(introduction, String);
-            check(id, String);
+        'user.changeProfile'(profession, introduction, id) {
+            check(profession, Match.Optional(Match.OneOf(String, null)));
+            check(introduction, Match.Optional(Match.OneOf(String, null)));
 
             const user = Meteor.user();
 
             if(user._id === id) {
                 Meteor.users.update({ _id: user._id }, {
-                    $set: { 'profile.introduction': introduction }
+                    $set: {
+                        'profile.profession': profession,
+                        'profile.introduction': introduction
+                    }
                 });
-            }
-            else {
-                throw new Meteor.Error(403, 'User Not Authenticated');
-            }
-        },
 
-        'user.setProfession'(profession, id) {
-            check(profession, Object);
-
-            const user = Meteor.user();
-
-            if(user._id === id) {
-                Meteor.users.update({ _id: user._id }, {
-                    $set: { 'profile.profession': profession }
-                });
+                Meteor.call('activities.create', ActivityTypes.PROFILE_CHANGE, user._id, null);
             }
             else {
                 throw new Meteor.Error(403, 'User Not Authenticated');

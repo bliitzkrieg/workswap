@@ -14,7 +14,7 @@ export const composer = ({ context, clearErrors }, onData) => {
 };
 
 export const depsMapper = (context, actions) => ({
-    changeIntroduction: actions.users.changeIntroduction,
+    saveProfile: actions.users.saveProfile,
     clearErrors: actions.users.clearProfileErrors,
     context: () => context
 });

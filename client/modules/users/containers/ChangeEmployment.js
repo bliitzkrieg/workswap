@@ -2,9 +2,7 @@ import ChangeEmployment from '../components/ChangeEmployment/ChangeEmployment.js
 import { useDeps, composeWithTracker, composeAll } from 'mantra-core';
 
 export const composer = ({}, onData) => {
-    onData(null, {
-
-    });
+    onData(null, { });
 
     return null;
 };
