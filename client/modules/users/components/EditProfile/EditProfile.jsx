@@ -8,6 +8,7 @@ import AlertMessage from '../../../core/components/AlertMessage/AlertMessage.jsx
 import ChangeAvatar from '../../containers/ChangeAvatar';
 import ChangeProfession from '../../components/ChangeProfession/ChangeProfession.jsx';
 import ChangeIntroduction from '../../components/ChangeIntroduction/ChangeIntroduction.jsx';
+import ChangeWebsite from '../../components/ChangeWebsite/ChangeWebsite.jsx';
 
 class EditProfile extends React.Component {
 
@@ -15,7 +16,8 @@ class EditProfile extends React.Component {
         super(props);
         this.state = {
             profession: props.user.profile.profession || '',
-            introduction: props.user.profile.introduction || ''
+            introduction: props.user.profile.introduction || '',
+            website: props.user.profile.website || ''
         };
     }
 
@@ -23,9 +25,9 @@ class EditProfile extends React.Component {
         e.preventDefault();
 
         const { saveProfile } = this.props;
-        const { profession, introduction } = this.state;
+        const { profession, introduction, website } = this.state;
 
-        saveProfile(profession, introduction);
+        saveProfile(profession, introduction, website);
     }
 
     professionCallback(profession) {
@@ -34,6 +36,10 @@ class EditProfile extends React.Component {
 
     introductionCallback(introduction) {
         this.setState({ introduction });
+    }
+
+    websiteCallback(website) {
+        this.setState({ website });
     }
 
     render() {
@@ -54,6 +60,7 @@ class EditProfile extends React.Component {
                             <AlertMessage type='success' message={ success } timeout={ 5000 } />
                             <ChangeProfession user={ user } callback={ this.professionCallback.bind(this) } />
                             <ChangeIntroduction user={ user} callback={ this.introductionCallback.bind(this) } />
+                            <ChangeWebsite user={ user } callback={ this.websiteCallback.bind(this) } />
 
                             <Button type="submit">Save</Button>
                         </form>

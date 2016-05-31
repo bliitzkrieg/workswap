@@ -13,6 +13,9 @@ export default function () {
 
         profile.createdAt = new Date();
         profile.introduction = null;
+        profile.profession = null;
+        profile.website = null;
+
         profile.admin = false;
 
         profile.recommendations = [];
@@ -107,9 +110,19 @@ export default function () {
             }
         },
 
-        'user.changeProfile'(profession, introduction, id) {
+        'user.changeProfile'(profession, introduction, website, id) {
             check(profession, Match.Optional(Match.OneOf(String, null)));
             check(introduction, Match.Optional(Match.OneOf(String, null)));
+            check(website, Match.Optional(Match.OneOf(String, null)));
+
+            if(typeof website === 'string') {
+                const expression = `^(http|https)://`;
+                const regex = new RegExp(expression);
+
+                if(!website.match(regex)) {
+                    website = `http://${ website }`;
+                }
+            }
 
             const user = Meteor.user();
 
@@ -117,7 +130,8 @@ export default function () {
                 Meteor.users.update({ _id: user._id }, {
                     $set: {
                         'profile.profession': profession,
-                        'profile.introduction': introduction
+                        'profile.introduction': introduction,
+                        'profile.website': website
                     }
                 });
 

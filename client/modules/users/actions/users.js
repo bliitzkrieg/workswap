@@ -199,12 +199,13 @@ export default {
         });
     },
 
-    saveProfile({ Meteor }, profession, introduction) {
+    saveProfile({ Meteor }, profession, introduction, website) {
         console.log(profession);
         console.log(introduction);
+        console.log(website);
 
         const id = Meteor.user()._id;
-        Meteor.call('user.changeProfile',profession, introduction, id, (err) => {
+        Meteor.call('user.changeProfile',profession, introduction, website, id, (err) => {
             if (err) {
                 Bert.alert( 'Sorry! Something went wrong. The reason is: ' + err.reason, 'danger', 'growl-top-right' );
                 return false;
