@@ -110,11 +110,15 @@ export default function () {
             }
         },
 
-        'user.changeProfile'(profession, introduction, website, id) {
+        'user.changeProfile'(profession, introduction, website, country, state, city, id) {
             check(profession, Match.Optional(Match.OneOf(String, null)));
             check(introduction, Match.Optional(Match.OneOf(String, null)));
             check(website, Match.Optional(Match.OneOf(String, null)));
+            check(country, Match.Optional(Match.OneOf(String, null)));
+            check(state, Match.Optional(Match.OneOf(String, null)));
+            check(city, Match.Optional(Match.OneOf(String, null)));
 
+            // Checks the validity of the website
             if(typeof website === 'string') {
                 const expression = `^(http|https)://`;
                 const regex = new RegExp(expression);
@@ -131,7 +135,10 @@ export default function () {
                     $set: {
                         'profile.profession': profession,
                         'profile.introduction': introduction,
-                        'profile.website': website
+                        'profile.website': website,
+                        'profile.country': country,
+                        'profile.state': state,
+                        'profile.city': city
                     }
                 });
 

@@ -22,7 +22,7 @@ class ChangeProfession extends React.Component {
     render() {
         return (
             <FormGroup>
-                <ControlLabel>Change Profession</ControlLabel>
+                <ControlLabel>What do you do?</ControlLabel>
                 <FormControl ref="profession"
                              value={ this.state.profession }
                              onChange={ this.handleChange.bind(this) }

@@ -9,6 +9,7 @@ import ChangeAvatar from '../../containers/ChangeAvatar';
 import ChangeProfession from '../../components/ChangeProfession/ChangeProfession.jsx';
 import ChangeIntroduction from '../../components/ChangeIntroduction/ChangeIntroduction.jsx';
 import ChangeWebsite from '../../components/ChangeWebsite/ChangeWebsite.jsx';
+import ChangeLocation from '../../containers/ChangeLocation';
 
 class EditProfile extends React.Component {
 
@@ -17,7 +18,10 @@ class EditProfile extends React.Component {
         this.state = {
             profession: props.user.profile.profession || '',
             introduction: props.user.profile.introduction || '',
-            website: props.user.profile.website || ''
+            website: props.user.profile.website || '',
+            country: props.user.profile.country || null,
+            state: props.user.profile.state || null,
+            city: props.user.profile.city || null
         };
     }
 
@@ -25,9 +29,16 @@ class EditProfile extends React.Component {
         e.preventDefault();
 
         const { saveProfile } = this.props;
-        const { profession, introduction, website } = this.state;
+        const {
+          profession,
+          introduction,
+          website,
+          country,
+          state,
+          city
+          } = this.state;
 
-        saveProfile(profession, introduction, website);
+        saveProfile(profession, introduction, website, country, state, city);
     }
 
     professionCallback(profession) {
@@ -40,6 +51,14 @@ class EditProfile extends React.Component {
 
     websiteCallback(website) {
         this.setState({ website });
+    }
+
+    locationCallback(location) {
+        this.setState({
+            country: location.country,
+            state: location.state,
+            city: location.city
+        });
     }
 
     render() {
@@ -61,7 +80,7 @@ class EditProfile extends React.Component {
                             <ChangeProfession user={ user } callback={ this.professionCallback.bind(this) } />
                             <ChangeIntroduction user={ user} callback={ this.introductionCallback.bind(this) } />
                             <ChangeWebsite user={ user } callback={ this.websiteCallback.bind(this) } />
-
+                            <ChangeLocation user={ user } callback={ this.locationCallback.bind(this) } />
                             <Button type="submit">Save</Button>
                         </form>
                     </Well>
