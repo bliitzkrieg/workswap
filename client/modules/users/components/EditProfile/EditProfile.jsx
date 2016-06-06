@@ -10,6 +10,7 @@ import ChangeProfession from '../../components/ChangeProfession/ChangeProfession
 import ChangeIntroduction from '../../components/ChangeIntroduction/ChangeIntroduction.jsx';
 import ChangeWebsite from '../../components/ChangeWebsite/ChangeWebsite.jsx';
 import ChangeLocation from '../../containers/ChangeLocation';
+import AddSkill from '../../components/AddSkill/AddSkill.jsx';
 
 class EditProfile extends React.Component {
 
@@ -35,10 +36,11 @@ class EditProfile extends React.Component {
           website,
           country,
           state,
-          city
+          city,
+          skills
           } = this.state;
 
-        saveProfile(profession, introduction, website, country, state, city);
+        saveProfile(profession, introduction, website, country, state, city, skills);
     }
 
     professionCallback(profession) {
@@ -61,6 +63,10 @@ class EditProfile extends React.Component {
         });
     }
 
+    skillCallback(skills) {
+        this.setState({ skills });
+    }
+
     render() {
         const { error, user, success } = this.props;
         return (
@@ -81,6 +87,7 @@ class EditProfile extends React.Component {
                             <ChangeIntroduction user={ user} callback={ this.introductionCallback.bind(this) } />
                             <ChangeWebsite user={ user } callback={ this.websiteCallback.bind(this) } />
                             <ChangeLocation user={ user } callback={ this.locationCallback.bind(this) } />
+                            <AddSkill user={ user } callback={ this.skillCallback.bind(this) } />
                             <Button type="submit">Save</Button>
                         </form>
                     </Well>

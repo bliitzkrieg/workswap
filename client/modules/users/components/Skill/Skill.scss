@@ -1,0 +1,18 @@
+@import "{}/client/styles/variables.scss";
+@import "{}/client/styles/mixins.scss";
+
+.user__skill {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  background: $main;
+  color: #fff;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 0 5px;
+}
+
+.user__skill__remove {
+  margin-left: 5px;
+  cursor: pointer;
+}

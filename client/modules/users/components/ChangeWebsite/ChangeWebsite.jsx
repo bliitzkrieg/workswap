@@ -27,7 +27,7 @@ class ChangeWebsite extends React.Component {
                              value={ this.state.website }
                              onChange={ this.handleChange.bind(this) }
                              type="url"
-                             placeholder={ 'http:/www.myawesomesite.com' } />
+                             placeholder="http:/www.myawesomesite.com" />
             </FormGroup>
         )
     }

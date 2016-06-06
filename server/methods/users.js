@@ -110,13 +110,14 @@ export default function () {
             }
         },
 
-        'user.changeProfile'(profession, introduction, website, country, state, city, id) {
+        'user.changeProfile'(profession, introduction, website, country, state, city, skills, id) {
             check(profession, Match.Optional(Match.OneOf(String, null)));
             check(introduction, Match.Optional(Match.OneOf(String, null)));
             check(website, Match.Optional(Match.OneOf(String, null)));
             check(country, Match.Optional(Match.OneOf(String, null)));
             check(state, Match.Optional(Match.OneOf(String, null)));
             check(city, Match.Optional(Match.OneOf(String, null)));
+            check(skills, Match.Optional(Match.OneOf(Array, null)));
 
             // Checks the validity of the website
             if(typeof website === 'string') {
@@ -138,7 +139,8 @@ export default function () {
                         'profile.website': website,
                         'profile.country': country,
                         'profile.state': state,
-                        'profile.city': city
+                        'profile.city': city,
+                        'profile.skills': skills
                     }
                 });
 
