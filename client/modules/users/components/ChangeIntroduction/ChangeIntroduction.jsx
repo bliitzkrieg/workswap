@@ -26,7 +26,7 @@ class ChangeIntroduction extends React.Component {
                 <FormControl ref="introduction"
                              value={ this.state.introduction }
                              onChange={ this.handleChange.bind(this) }
-                             type="text"
+                             componentClass="textarea"
                              placeholder="Keep it clear and simple" />
             </FormGroup>
         )
